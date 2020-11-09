@@ -1,14 +1,52 @@
-var ncmb = new NCMB('f8981f796b63b674bd2c30a28e47d30b075842f8399abb1bd6c9593937a3fbe6','fbf1b390ae25bf7805e537e084cb2a353082cdd95f46417a06d394a6398a045c'); 
+// API key.
+var applicationKey = "3175ddc3c2fa11d0f748f336750ae51023d4a1a1ea1f09d77d3910cbd768d03b";
+var clientKey = "50a1429776c8c386c04301ff11b50b555ca71fe1970db72f4e01f1f7257bc9d5";
+// SDK initialization.
+var ncmb = new NCMB(applicationKey, clientKey);
 
-function send_user(user_name){
+function SendUser(user_name){
 
-  var Datestore = new ncmb.Datestore(users);
+  var Datestore = ncmb.Datestore("users");
   var datestore = new Datestore();
   var user = document.getElementById(user_name).textContent
 
   datestore.set(user_name,user)
-  .save()
-  .then(function(gameScore){
+  datestore.save()
+  .then(function(){
+    // 保存後の処理
+    })
+    .catch(function(){
+        // エラー処理
+    });
+}
+function UpdateUser(user_name){
+
+  var Datestore = new ncmb.Datestore(users);
+  var datestore = Datestore.equalTo("user_id",1)
+           .fetchAll()
+           .save()
+           .then(function(datestore){
+             datestore.set("user_name",document.getElementById(user_name).textContent);
+             return datestore.update();
+          })
+    .then(function(gameScore){
+    // 保存後の処理
+    })
+    .catch(function(err){
+        // エラー処理
+    });
+}
+
+function Delete(){
+  var Datestore = new ncmb.Datestore(users);
+  var datestore = Datestore.equalTo("user_id",1)
+           .fetchAll()
+           .save()
+           .then(function(datestore){
+             datestore.set("user_name",document.getElementById(user_name).textContent);
+             return datestore.update();
+          })
+    .then(function(gameScore){
     // 保存後の処理
     })
     .catch(function(err){
