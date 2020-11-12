@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <title>引き継ぎコード発行</title> 
+    <script src="components/loader.js"></script>
+    <script>
+     /*ニフクラのDBからユーザーIDの検索 
+     var ncmb = new NCMB(apikey, clientkey);
+
+     // プレイヤーがTaroのスコアを降順で取得
+     var GameScore = ncmb.DataStore("GameScore");
+     GameScore.equalTo("playerName", "Taro")
+         .order("score",true)
+         .fetchAll()
+         .then(function(results){
+            console.log("Successfully retrieved " + results.length + " scores.");
+            for (var i = 0; i < results.length; i++) {
+              var object = results[i];
+              console.log(object.score + " - " + object.get("playerName"));
+            }
+          })
+         .catch(function(err){
+            console.log(err);
+          });
+     */
+
+    //日付をとってきている処理
+      window.onload = function () {
+      var today = new Date();
+      var day = today.getFullYear()+""+(today.getMonth()+1)+""+today.getDate();
+      }
+
+   //ログイン時に取ってきたユーザーID
+      var login = kintubaki;
+
+  //ユーザーidと日付でハッシュ化している処理 
+      async function sha256(text){
+      const uint8  = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest('SHA-256', uint8);
+      return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2,'0')).join('');
+}
+      sha256(day + login).then(hash => console.log(hash));
+      
+    </script>
+</head> 
+<body>
+  
+  <form action = "" method = "post">
+    <p>引き継ぎコード</p>
+       <table>
+         <tr>
+           <td>
+             <p></p>
+           </td>
+         </tr>
+         <tr>
+            <td>
+              <input type = "submit" value = "新規で発行する" name = "takeover">
+            </td>  
+         </tr> 
+         </table>
+         </form>
+         <form action = "" method = "get"> 
+        <input type = "submit" value = "戻る">
+        </form>
+</body>
+</html>
