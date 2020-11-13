@@ -6,27 +6,23 @@
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="components/loader.css">
     <script src="JavaScript/auth.js"></script>
-    <script>
-        //
-        // TODO: Write JavaScript code here
-        //
-    </script>
 </head>
 <body>
   <p>登録確認</p>
   <table>
       <tr>
           <th>ユーザー名</th>  
-          <script>
-          function text(){          
-            var text_message = document.getItem('data1');
-            alert("受け取った文字は 「" + text_message + "」です。");  
-          } 
+          <script>          
+            var text_message = localStorage.getItem('data1');
           </script>
       </tr>
   </table>
+    <p id="text"></p>
+    <script>
+        document.getElementById('text').innerText = text_message;
+    </script>
   <div>
     <button id ="resistbtn" onClick="text()">登録する</button>
-    <button type ="button" value ="戻る"onClick="history.back()"class="btn btn-lg btn-primary btn-block">
+    <button type ="button" onClick="history.back()"class="btn btn-lg btn-primary btn-block">戻る</button>
 </body>
 </html>

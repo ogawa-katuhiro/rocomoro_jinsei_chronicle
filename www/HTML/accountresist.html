@@ -11,7 +11,7 @@
     <script>
      function btnResistClick(){
         localStorage.setItem('data1', document.getElementById("inputName").value);
-        alert("登録しました");
+        
         document.getElementById("inputName").value = "";
     }
     </script>
@@ -35,8 +35,8 @@
     </tr>    
     </table>
   <div>
-    <button id ="resist"onClick="btnResistClick();"class="btn btn-lg btn-primary btn-block">登録</button>
-    <button type ="button" value ="戻る"onClick="history.back()"class="btn btn-lg btn-primary btn-block">
+    <button id ="resist"onClick="btnResistClick(); location.href='accountconfirm.html'"class="btn btn-lg btn-primary btn-block" >登録</button>
+    <input type ="button" value ="戻る"onClick="history.back()"class="btn btn-lg btn-primary btn-block">
   <div>
 
 
