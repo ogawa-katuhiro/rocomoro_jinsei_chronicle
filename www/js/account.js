@@ -8,7 +8,7 @@ function SendUser(user_name){
 
   var Datestore = ncmb.Datestore("users");
   var datestore = new Datestore();
-  var user = document.getElementById(user_name).textContent
+  var user = document.getElementById(user_name).value;
 
   datestore.set(user_name,user)
   datestore.save()
@@ -26,7 +26,7 @@ function UpdateUser(user_name){
            .fetchAll()
            .save()
            .then(function(datestore){
-             datestore.set("user_name",document.getElementById(user_name).textContent);
+             datestore.set("user_name",document.getElementById(user_name).value);
              return datestore.update();
           })
     .then(function(gameScore){
@@ -38,12 +38,12 @@ function UpdateUser(user_name){
 }
 
 function Delete(){
-  var Datestore = new ncmb.Datestore(users);
+  var Datestore = new ncmb.Datestore("users");
   var datestore = Datestore.equalTo("user_id",1)
            .fetchAll()
            .save()
            .then(function(datestore){
-             datestore.set("user_name",document.getElementById(user_name).textContent);
+             datestore.set("user_name",document.getElementById(user_name).value);
              return datestore.update();
           })
     .then(function(gameScore){
