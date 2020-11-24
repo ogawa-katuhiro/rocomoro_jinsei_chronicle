@@ -6,10 +6,42 @@
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="components/loader.css">
     <script src="components/loader.js"></script>
-    <script>
-    </script>
+    <script src="js/room.js"></script>
 </head>
 <body>
-  room
+  <input type="button" onclick="roomOut()" value="退室">
+  <p id="admin">あなたはホストです</p>
+  <p id="user">参加者</p>
+  <table id="asd">
+  </table>
+<script>
+  async function view(){
+  var arr = await userSearch();
+  var flg = await AdminCheck();
+  var text = "";
+  if(flg === 1){
+		// blockで表示
+		admin.style.display ="block";
+	}else{
+		// noneで非表示
+		admin.style.display ="none";
+	}
+  var tableEle = document.getElementById('asd');
+  for (var i = 0; i < arr.length; i++) {
+    // テーブルの行を 追加する
+    var tr = document.createElement('tr');
+    for (var j = 0; j < arr.length; j++) {
+      // テーブルの列を 追加する
+      var td = document.createElement('td');
+      td.innerHTML = arr[i];
+      tr.appendChild(td);
+  }
+  tableEle.appendChild(tr);
+  }
+  
+}
+
+view();
+</script>
 </body>
 </html>

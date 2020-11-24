@@ -6,18 +6,22 @@
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="components/loader.css">
     <script src="components/loader.js"></script>
-    <script src="js/room.js">
-      
-    </script>
+    <script src="js/room.js"></script>
 </head>
 <body>
     <input type="text"id="room_name">
-    <input type="button" onclick="MaxId();AdminCheck();" value="登録">
-    <input type="button" onclick="AdminCheck();"value="入室">
+    <input type="button" onclick="MaxId();AdminFlg();" value="登録">
+    <input type="button" onclick="AdminFlg();"value="入室">
     <input type="button" onclick="Change();" value="変更">
+    <input type="button" onclick="resist();" value="検索">
 </body>
 <script>
-sessionStorage.setItem("user_id",007);
-sessionStorage.setItem("room_id",9);
+sessionStorage.setItem("user_id",008);
+sessionStorage.setItem("room_id",099);
+
+function resist(){
+  sessionStorage.setItem("search_name",document.getElementById("room_name").value);
+  location.href='roomsearch.html';
+}
 </script>
 </html>
