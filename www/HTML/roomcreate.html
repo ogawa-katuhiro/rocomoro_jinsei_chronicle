@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+     <link rel="stylesheet" href="../css/takeover.css">
+    <script>
+        //ボタンを押下した時の処理
+     function btnRoomCreate(){
+
+       //ローカルストレージに値をセットする処理
+        localStorage.setItem('room', document.getElementById("inputRoom").value);
+        
+        document.getElementById("inputRoom").value = "";
+    }
+    </script>
+</head>
+<body>
+   <h1>ルーム作成</h1>
+    <div class="box">
+      このboxタグの中にルーム名、人数、パスワード、コメント欄のボックスお願いします
+    </div>
+    <button class="button" id="inputRoom"onClick="btnRoomCreate() location.href=''" >ルーム作成</button>
+    <button onClick="location.href='menu.html'">戻る</button>
+  </div>
+</body>
+</html>
