@@ -9,46 +9,40 @@
     <script src="js/room.js"></script>
 </head>
 <body>
-  <input type="button" onclick="aaaaaa()" value="退室">
-  <p id="admin">あなたはホストです</p>
-  <p id="user">参加者一覧</p>
-  <table id="asd">
-  </table>
+    <table id="roomlist">
+
+</body>
 <script>
-  async function aaaaaa(){
-    var flag = await roomOut();
-    if(flag == 1){
-      Delete();
-    }
-    location.href='testRoomCreate.html';
-  }
-  async function view(){
-  var arr = await userSearch();
-  var flg = await AdminCheck();
+  async function roomview(){
+    
+  var arr = await roomSearch();
   var text = "";
-  if(flg === 1){
-		// blockで表示
-		admin.style.display ="block";
-	}else{
-		// noneで非表示
-		admin.style.display ="none";
-	}
-  var tableEle = document.getElementById('asd');
+
+  var tableEle = document.getElementById('roomlist');
   for (var i = 0; i < arr.length; i++) {
     // テーブルの行を 追加する
     var tr = document.createElement('tr');
-    for (var j = 0; j < arr.length; j++) {
+    for (var j = 0; j < arr[i].length; j++) {
       // テーブルの列を 追加する
       var td = document.createElement('td');
-      td.innerHTML = arr[i];
+      td.innerHTML = arr[i][j];
+
       tr.appendChild(td);
+
+      //pwアリの場合の画像表示
+      if(j == 1 && arr[i][j] != null){
+        var td2 = document.createElement('td');
+        var image = document.createElement('img');
+        image.src = "img/chara1.png";
+        td2.appendChild(image);
+        tr.appendChild(td2);
+      }
   }
   tableEle.appendChild(tr);
   }
   
 }
 
-view();
+roomview();
 </script>
-</body>
 </html>

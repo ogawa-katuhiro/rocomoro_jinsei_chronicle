@@ -3,7 +3,7 @@
   <name>Minimum Template</name>
   <description>Made with Monaca (http://monaca.mobi)</description>
   <author/>
-  <content src="RoomCreate.html"/>
+  <content src="testRoomCreate.html"/>
   <access origin="*"/>
   <allow-navigation href="*"/>
   <allow-intent href="itms:*"/>
@@ -24,7 +24,6 @@
   <preference name="FadeSplashScreen" value="true"/>
   <preference name="FadeSplashScreenDuration" value="250"/>
   <preference name="KeyboardDisplayRequiresUserAction" value="true"/>
-  <preference name="MediaPlaybackRequiresUserAction" value="false"/>
   <preference name="ShowSplashScreenSpinner" value="false"/>
   <preference name="SuppressesIncrementalRendering" value="false"/>
   <preference name="TopActivityIndicator" value="gray"/>
@@ -37,7 +36,6 @@
   </feature>
   <preference name="UIWebViewDecelerationSpeed" value="normal"/>
   <preference name="monaca:AndroidIsPackageNameSeparate" value="false"/>
-  <preference name="ios-XCBuildConfiguration-TARGETED_DEVICE_FAMILY" value="1,2"/>
   <platform name="ios">
     <preference name="orientation" value="all"/>
     <icon src="/res/ios/icon/icon.png" width="57" height="57"/>
@@ -74,6 +72,8 @@
         <string>en</string>
       </array>
     </config-file>
+    <preference name="scheme" value="monaca-app"/>
+    <preference name="hostname" value="localhost"/>
   </platform>
   <platform name="android">
     <preference name="android-targetSdkVersion" value="29"/>
@@ -100,4 +100,6 @@
   </platform>
   <preference name="WindowsStorePublisherName" value="My Name"/>
   <preference name="WindowsStoreIdentityName" value="6748e1db-0418-22eb-873f-7d2dd687f687"/>
+  <preference name="MediaTypesRequiringUserActionForPlayback" value="false"/>
+  <preference name="target-device" value="universal"/>
 </widget>

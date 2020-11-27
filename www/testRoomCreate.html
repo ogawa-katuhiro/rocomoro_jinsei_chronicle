@@ -10,18 +10,20 @@
 </head>
 <body>
     <input type="text"id="room_name">
-    <input type="button" onclick="MaxId();AdminFlg();" value="登録">
+    <input type="button" onclick="location.href='roomcreate.html'" value="登録">
     <input type="button" onclick="AdminFlg();"value="入室">
     <input type="button" onclick="Change();" value="変更">
     <input type="button" onclick="resist();" value="検索">
+    <input type="button" onclick="location.href='accountresist.html'"value="アカウント登録">
+    <input type="button" onclick="location.href='accountchange.html'"value="アカウント変更">
+    <input type="button" onclick="location.href='takeover.html'"value="引継ぎ">
 </body>
 <script>
-sessionStorage.setItem("user_id",008);
-sessionStorage.setItem("room_id",099);
+localStorage.setItem("user_id",007);
 
 function resist(){
   sessionStorage.setItem("search_name",document.getElementById("room_name").value);
-  location.href='roomsearch.html';
+  location.href='testroomsearch.html';
 }
 </script>
 </html>

@@ -22,17 +22,19 @@ function startDemo() {
 }
 
 
-function Create(max_id){
+function Create(room_name,count,password,comment,max_id){
 
   var Room = ncmb.DataStore("room");
   var room = new Room();
 
-  var room_id = max_id+1;
-  var roomName = document.getElementById("room_name").value;
-  
+  var room_id = max_id;
+
   room.set("room_id",room_id);
-  room.set("room_name",roomName);
-  room.set("comment","test");
+  room.set("room_name",room_name);
+  room.set("comment",comment);
+  room.set("password",password);
+  room.set("play_limit",count);
+  room.set("delete_flag",2);
   room.save()
   .then(function(){
     // 保存後の処理
@@ -48,44 +50,63 @@ function Create(max_id){
 function Delete(){
   
   var Room = ncmb.DataStore("room");
-  var room_id = Number(sessionStorage.getItem("room_id"));
-  var room = Room.equalTo("room_id",room_id)
-  room.fetchAll().then(function(results){
-    var object = results[0];
-    object.set("dlete_flag",1);
+
+  var room_id = Number(localStorage.getItem("room_id"));
+  Room.equalTo("room_id",room_id);
+  Room.fetch().then(function(results){
+    var object = results;
+    alert(object.get("delete_flag"));
+    object.set("delete_flag",1);
     return object.update();
     })
     .then(function(){
       // 保存後の処理
-      alert("room変更成功");
+      alert("room削除成功");
       })
       .catch(function(){
       // エラー処理
-      alert("room変更失敗");
+      alert("room削除失敗");
     });
 }
 
-function roomInTo(adminflg){
+function roomInTo(user_id,room_id,adminflg){
 
   var RoomPlayer = ncmb.DataStore("room_player");
   var roomplayer = new RoomPlayer();
 
-  var user_id = Number(sessionStorage.getItem("user_id"));
-  var room_id = Number(sessionStorage.getItem("room_id"));
+  alert("qawsedrftgy");
 
-   roomplayer.set("admin_flg",adminflg)
-   .set("user_id",user_id)
-   .set("room_id",room_id);
+   roomplayer.set("admin_flg",adminflg);
+   roomplayer.set("user_id",Number(user_id));
+   roomplayer.set("room_id",room_id);
    roomplayer.save()
   .then(function(){
     // 保存後の処理
-    location.href='room.html';
-    alert("seikou")
+    alert("ok");
     })
     .catch(function(){
      // エラー処理
+     alert("ng");
     });
+   
+}
 
+async function roomOut(){
+
+  var RoomPlayer = ncmb.DataStore("room_player");
+  var roomplayer = new RoomPlayer();
+
+  var user_id = Number(localStorage.getItem("user_id"));
+  var room_id = Number(localStorage.getItem("room_id"));
+  var admin_flg = null;
+
+  await RoomPlayer.equalTo("room_id",room_id).equalTo("user_id",user_id).fetchAll().then(function(results){
+    var object = results[0];
+    admin_flg = object.get("admin_flg");
+    object.set("room_id",null).set("user_id",null).set("admin_flg",null);
+    return object.update();
+  });
+  return admin_flg;
 }
 
 function Change(){
@@ -110,50 +131,59 @@ function Change(){
     });
 }
 
-function MaxId(){
+async function MaxId(){
   var Room = ncmb.DataStore("room");
-  var roomSelect = Room.exists("room_id");
-
-  roomSelect.order("room_id",true)
-  .fetchAll()
-  .then(function(results){
+  var max_id = null;
+  await Room.exists("room_id").order("room_id",true).fetchAll().then(function(results){
     var object = results[0];
-     var max_id = object.get("room_id");
-     Create(max_id);
+     max_id = object.get("room_id")+1;
+     
      });
+     return max_id;
 }
 
- function AdminFlg(){
+async function AdminFlg(room_id){
 
   var Room = ncmb.DataStore("room_player");
-  var adminflg = 2;
-  var room_id = Number(sessionStorage.getItem("room_id"));
-  var roomSelect = Room.equalTo("room_id",room_id)
-  roomSelect.fetchAll().then(function(results){
-    if(results.length !== 0){
-      roomInTo(adminflg);
-    }else{
-      adminflg = 1;
-      roomInTo(adminflg);
+  var adminflg = 1;
+
+  await Room.equalTo("room_id",room_id).fetchAll().then(function(results){
+    if(results.length != 0){
+      adminflg = 2;
     }});
+
+    return adminflg;
 }
 
-function roomSearch(){
+async function roomSearch(){
   var Room = ncmb.DataStore("room");
+
+  var arr = [];
+
   var room_name = sessionStorage.getItem("search_name");
-  alert(room_name);
-  var roomSearch = Room.regularExpressionTo("room_name",".*"+room_name+".*");
-  roomSearch.fetchAll().then(function(results){
+
+  await Room.regularExpressionTo("room_name",".*"+room_name+".*").fetchAll().then(function(results){
     for (var i = 0; i < results.length; i++) {
               var object = results[i];
-              (object.get("room_id"));
-    }});
+              var name = object.get("room_name");
+              var pw = object.get("password");
+              var arr2 = [name,pw];
+              arr.push(arr2);
+    }}).then(function(){
+      // 保存後の処理
+      alert("成功");
+      })
+      .catch(function(){
+      // エラー処理
+      alert("失敗");
+    });
+    return arr;
 }
 
 async function AdminCheck(){
   var Room = ncmb.DataStore("room_player");
-  var room_id = Number(sessionStorage.getItem("room_id"));
-  var user_id = Number(sessionStorage.getItem("user_id"));
+  var room_id = Number(localStorage.getItem("room_id"));
+  var user_id = Number(localStorage.getItem("user_id"));
   var admin_flg = null;
   await Room.equalTo("room_id",room_id).equalTo("user_id",user_id).fetchAll().then(function(results){
               var object = results[0];
@@ -165,7 +195,7 @@ async function AdminCheck(){
 
 async function userSearch(){
   var Room = ncmb.DataStore("room_player");
-  var room_id = Number(sessionStorage.getItem("room_id"));
+  var room_id = Number(localStorage.getItem("room_id"));
   var arr = [];
   await Room.equalTo("room_id",room_id).fetchAll().then(function(results){
     for (var i = 0; i < results.length; i++) {
