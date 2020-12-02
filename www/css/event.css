@@ -1,0 +1,13 @@
+/* This is a CSS file */
+@import url('https://fonts.googleapis.com/css?family=Sawarabi+Gothic');
+
+body{ 
+  font-family: 'Sawarabi Gothic', sans-serif;
+  background-image: url("../Photo/shibuki.png");
+  background-color: #000000
+}
+.event{
+  width:400px;
+  top:100px;
+  left:50px;
+}

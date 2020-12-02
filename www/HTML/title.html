@@ -7,14 +7,11 @@
     <link rel="stylesheet" href="../css/gametitle.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/85188/jquery.ripples-min.js"></script>
-<script>$('.container').ripples({
-    resolution: 400
-});
-</script>
-<!--ここでアニメーションを設定しています-->
+
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script type="text/javascript">
 </script>
+<!--タイトルを表示する画面-->
 </head>
 <body>  
   <div class="logo">
@@ -28,5 +25,12 @@
       <P><a href="accountresist.html">新規登録はこちら</a></p>
     </div>
   </div>
+  <img id="event" src="../Photo/ikiriotaku.jpg" class="event"/>
+  <script>
+     //画像が2回押された時イベント発動
+      document.getElementById('event').addEventListener('dblclick',function(){
+        window.open('event1.html');
+     });   
+</script>
 </body>
 </html>
