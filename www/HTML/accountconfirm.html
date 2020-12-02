@@ -4,25 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="components/loader.css">
-    <script src="JavaScript/auth.js"></script>
+    <link rel="stylesheet" href="../css/takeover.css">
+
+
+    <!--アカウント登録確認の画面-->
 </head>
 <body>
-  <p>登録確認</p>
   <table>
       <tr>
           <th>ユーザー名</th>  
-          <script>          
+          <script>
+          //ローカルストレージから値をとってきている処理         
             var text_message = localStorage.getItem('data1');
           </script>
       </tr>
   </table>
+  <div class="box">
     <p id="text"></p>
     <script>
+      //ローカルストレージに入ってるテキストの表示
         document.getElementById('text').innerText = text_message;
     </script>
-  <div>
-    <button id ="resistbtn" onClick="text()">登録する</button>
-    <button type ="button" onClick="history.back()"class="btn btn-lg btn-primary btn-block">戻る</button>
+    </div>
+  <div class="wrap">
+    <button class="button" onClick="location.href='accountcomplete.html'">登録する</button>
+    <button onClick="history.back()"class="button">戻る</button>
+    </div>
 </body>
 </html>

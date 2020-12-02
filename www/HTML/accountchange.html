@@ -4,19 +4,38 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="components/loader.css">
-    <script src="components/loader.js"></script>
+   <link rel="stylesheet" href="../css/takeover.css">
 </head>
 <body>
+  <h1>オプション</h1>
+  <div class="box">
   <button id="btn">変更</button>
+  <button id="erase">削除</button>
+  </div>
 </body>
  <script>
     const btn = document.getElementById('btn');
   
     btn.addEventListener('click', function() {
   
-  var text = prompt('変更する名前を入力して下さい');
+    var text = prompt('変更する名前を入力して下さい(10文字以内)');
   
   });
+   const erase = document.getElementById('erase');
+  
+    erase.addEventListener('click', function() {
+  
+    var tevt = window.confirm('アカウントを削除してもよろしいですか？');
+
+    if(tevt){
+      console.log('OKがクリックされました');
+      alert("削除しました！");
+      location.href='title.html';
+    }
+    else{
+        console.log('キャンセルがクリックされました');
+    }
+
+    });
     </script>
 </html>

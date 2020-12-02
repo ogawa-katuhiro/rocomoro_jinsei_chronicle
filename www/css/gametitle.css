@@ -1,0 +1,55 @@
+/* This is a CSS file */
+@import url('https://fonts.googleapis.com/css?family=Merienda');
+
+body {
+  display: flex;
+  position: absolute;
+  background-image: url("../Photo/title.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Merienda', cursive;
+  z-index: 2;
+  justify-content: center;
+  text-align: center;
+}
+
+.image_size_m{
+    width:500px;
+    height:200px;
+}
+.logo{
+  margin: 0 auto;
+  position: absolute;
+  top:50px;
+  left: 60px;
+  display: flex;
+  background-size: cover;
+  background-position: center center; 
+  z-index: 1;
+  width:20px;
+  text-align: center;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position:fixed;
+  top:0px;left:0px;
+  margin:0px;
+  padding:0px;
+  text-align: center;
+  padding-top:100px;
+  padding-bottom:10px;
+  width: 100%;
+
+}
+
+.box {
+  
+  background: rgba(255,255,255,.7);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size:25px
+}

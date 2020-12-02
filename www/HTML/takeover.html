@@ -4,68 +4,68 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="components/loader.css">
-    <title>引き継ぎコード発行</title> 
-    <script src="components/loader.js"></script>
+    <title>引き継ぎコード発行</title>  
+    <link rel="stylesheet" href="../css/takeover.css">  
     <script>
-     /*ニフクラのDBからユーザーIDの検索 
-     var ncmb = new NCMB(apikey, clientkey);
+     //ニフクラのDBからユーザーIDの検索 
 
-     // プレイヤーがTaroのスコアを降順で取得
-     var GameScore = ncmb.DataStore("GameScore");
-     GameScore.equalTo("playerName", "Taro")
-         .order("score",true)
-         .fetchAll()
-         .then(function(results){
-            console.log("Successfully retrieved " + results.length + " scores.");
-            for (var i = 0; i < results.length; i++) {
-              var object = results[i];
-              console.log(object.score + " - " + object.get("playerName"));
-            }
-          })
-         .catch(function(err){
-            console.log(err);
-          });
-     */
 
-    //日付をとってきている処理
-      window.onload = function () {
-      var today = new Date();
-      var day = today.getFullYear()+""+(today.getMonth()+1)+""+today.getDate();
-      }
+  //ユーザーIDと日付でハッシュ化している処理 
+     async function sha256(a) {
+                  
+        //日付のハッシュ化
+        var today = new Date();
+        var day = today.getFullYear()+""+(today.getMonth()+1)+""+today.getDate();
+       
+        //ログイン時に取ってきたユーザーID(ここは後でDBに保存してる値に変える！)
+          
 
-   //ログイン時に取ってきたユーザーID
-      var login = kintubaki;
+        
+        //日付とユーザーIDの組み合わせ
+        var aa=day+a;
+              
+        const buff = new Uint8Array([].map.call(aa, (c) => c.charCodeAt(0))).buffer;
 
-  //ユーザーidと日付でハッシュ化している処理 
-      async function sha256(text){
-      const uint8  = new TextEncoder().encode(text);
-      const digest = await crypto.subtle.digest('SHA-256', uint8);
-      return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2,'0')).join('');
-}
-      sha256(day + login).then(hash => console.log(hash));
-      
+        const digest = await crypto.subtle.digest('sha-1', buff);
+        
+        return [].map.call(new Uint8Array(digest), x => ('00' + x.toString(16)).slice(-2)).join('');
+         
+}       //ハッシュ化の処理
+        function aiueo(){
+        (async () => {
+        const digest = await sha256("kintubaki");
+      document.getElementById('edit_area').textContent=digest;
+ })
+ ()};
     </script>
 </head> 
 <body>
-  
-  <form action = "" method = "post">
-    <p>引き継ぎコード</p>
+    <p>引き継ぎコード発行</p>
        <table>
          <tr>
            <td>
-             <p></p>
+
+             <p id="edit_area"class="box">※引き継ぎコードはここに表示されます</p>
+             <script>
+              
+        </script>
            </td>
          </tr>
-         <tr>
-            <td>
-              <input type = "submit" value = "新規で発行する" name = "takeover">
-            </td>  
-         </tr> 
+         <p>※引き継ぎコードは必ずメモをして大切に保管してください</p>
          </table>
-         </form>
-         <form action = "" method = "get"> 
-        <input type = "submit" value = "戻る">
-        </form>
-</body>
+         <div class="wrap">
+           <table>
+             <tr>
+               <td>
+         <button id="sha256" onclick="aiueo();"class="button">発行する</button>
+              </td>
+              </tr>
+              <tr>
+              <td>         
+         <button class="button"onClick="location.href='title.html'">戻る</button>
+              </td>
+              </tr>
+           </table>
+<div>
+</body> 
 </html>

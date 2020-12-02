@@ -4,50 +4,47 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="floating-labels.css" rel="stylesheet">
-    <link rel="stylesheet" href="components/loader.css">
-    <script src="JavaScript/auth.js"></script>
+        <link rel="stylesheet" href="../css/takeover.css">
     <script>
+
+      //ボタンを押下した時の処理
      function btnResistClick(){
+
+       //ローカルストレージに値をセットする処理
         localStorage.setItem('data1', document.getElementById("inputName").value);
         
         document.getElementById("inputName").value = "";
     }
     </script>
 
-
+<!--アカウント登録の画面-->
 <title>登録画面</title>
 </head>
 <body>
   <div class="text-center mb-4">
-    <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">新規アカウント登録画面</h1>
   </div>
+  <div class="box">
   <table>
     <tr>
       <th>ユーザー名</th>
     </tr>
     <tr>
         <td>
-          <input type="text" id="inputName" class="form-control" placeholder="user name" required>
+          <!--ユーザーの名前を入力するテキストボックス-->
+          <div class="inputWithIcon inputIconBg">
+          <input type="text" id="inputName" placeholder="user name" required>
+           <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+        </div>
         </td>
     </tr>    
     </table>
-  <div>
-    <button id ="resist"onClick="btnResistClick(); location.href='accountconfirm.html'"class="btn btn-lg btn-primary btn-block" >登録</button>
-    <input type ="button" value ="戻る"onClick="history.back()"class="btn btn-lg btn-primary btn-block">
-  <div>
+    </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>
-  window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
-</script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script><script src="/docs/4.3/assets/js/vendor/anchor.min.js"></script>
-<script src="/docs/4.3/assets/js/vendor/clipboard.min.js"></script>
-<script src="/docs/4.3/assets/js/vendor/bs-custom-file-input.min.js"></script>
-<script src="/docs/4.3/assets/js/src/application.js"></script>
-<script src="/docs/4.3/assets/js/src/search.js"></script>
-<script src="/docs/4.3/assets/js/src/ie-emulation-modes-warning.js"></script>
+    <!--テキストボックスに入れた値を持って確認画面へ遷移するボタン-->
+    <div class="wrap">
+    <button onClick="btnResistClick(); location.href='accountconfirm.html'"class="button" >登録</button>
+    <button onClick="location.href='title.html'"class="button">戻る</button
+  </div>
 </body>
 </html>
