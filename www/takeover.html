@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="components/loader.css">
     <title>引き継ぎコード発行</title> 
     <script src="components/loader.js"></script>
+    <script src="js/account.js"></script>
     <script>
      /*ニフクラのDBからユーザーIDの検索 
      var ncmb = new NCMB(apikey, clientkey);
@@ -33,7 +34,7 @@
       const digest = await crypto.subtle.digest('SHA-256', uint8);
       return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2,'0')).join('');
 }
-async function takeover(){
+async function takeoverfanc(){
 
   //ログイン時に取ってきたユーザーID
       var login = localStorage.getItem('user_id');
@@ -45,6 +46,8 @@ async function takeover(){
       await sha256(day + login).then(function(hash){
         code = hash;
       });
+
+      takeover(code);
 
       document.getElementById("code").innerHTML = code;
 
@@ -63,7 +66,7 @@ async function takeover(){
          </tr>
          <tr>
             <td>
-              <input type = "button" onclick="takeover();" value = "新規で発行する">
+              <input type = "button" onclick="takeoverfanc();" value = "新規で発行する">
             </td>  
          </tr> 
          </table>

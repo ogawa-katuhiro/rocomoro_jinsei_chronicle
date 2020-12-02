@@ -21,21 +21,25 @@
       <input type="text" id="password"placeholder="パスワード">
       <input type="text" id="comment"placeholder="コメント">
     </div>
-    <button class="button" id="inputRoom"onClick="btnRoomCreate()" >ルーム作成</button>
+    <input type="button" class="button" id="inputRoom"onClick="Createfnc()"value="ルーム作成">
+     <input type="button" class="button" id="inputRoom"onClick="btnRoomCreate()"value="ルーム">
     <button onClick="history.back()">戻る</button>
   </div>
   <script>
         //ボタンを押下した時の処理
-     async function btnRoomCreate(){
+     async function Createfnc(){
 
-       //ローカルストレージに値をセットする処理
-        var user_id = localStorage.getItem('user_id');
+        var user_id = Number(localStorage.getItem('user_id'));
         var room_name = document.getElementById("room_name").value;
         var count = Number(document.getElementById("count").value);
         var password = document.getElementById("password").value;
+        if(password == ""){
+          password = null;
+        }
         var comment = document.getElementById("comment").value;
 
         var max_id = await MaxId();
+
         await Create(room_name,count,password,comment,max_id);
 
         var adminflg = await AdminFlg(max_id);
@@ -43,8 +47,9 @@
         await roomInTo(user_id,max_id,adminflg);
 
         localStorage.setItem("room_id",max_id);
-        
-        location.href='room.html';
+    }
+    function btnRoomCreate(){
+      location.href='room.html'
     }
     </script>
 </body>

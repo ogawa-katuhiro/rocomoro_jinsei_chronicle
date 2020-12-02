@@ -1,6 +1,6 @@
 {
   "name": "ncmb",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "homepage": "https://mbaas.nifcloud.com/",
   "repository": {
     "type": "git",
@@ -30,14 +30,14 @@
     "CONTRIBUTING.md",
     "package.json"
   ],
-  "_release": "3.1.0",
+  "_release": "3.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v3.1.0",
-    "commit": "3e35ad615d21a19dba6f6d7f4aebe14dc9c25bcd"
+    "tag": "v3.1.1",
+    "commit": "8ed0f8be4113550b292c1b29c326220ef7fc37b5"
   },
   "_source": "https://github.com/NIFTYCloud-mbaas/ncmb_js.git",
-  "_target": "3.1.0",
+  "_target": "3.1.1",
   "_originalSource": "ncmb",
   "_direct": true
 }

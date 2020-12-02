@@ -7,19 +7,22 @@
     <link rel="stylesheet" href="components/loader.css">
     <script src="components/loader.js"></script>
     <script src="js/room.js"></script>
+    <script src="js/account.js"></script>
 </head>
 <body>
     <input type="text"id="room_name">
     <input type="button" onclick="location.href='roomcreate.html'" value="登録">
     <input type="button" onclick="AdminFlg();"value="入室">
     <input type="button" onclick="Change();" value="変更">
-    <input type="button" onclick="resist();" value="検索">
+    <input type="button" onclick="location.href='roomsrearch.html'" value="検索">
     <input type="button" onclick="location.href='accountresist.html'"value="アカウント登録">
     <input type="button" onclick="location.href='accountchange.html'"value="アカウント変更">
     <input type="button" onclick="location.href='takeover.html'"value="引継ぎ">
+     <input type="button" onclick="login()"value="ログイン">
+
 </body>
 <script>
-localStorage.setItem("user_id",007);
+localStorage.setItem("user_id",002);
 
 function resist(){
   sessionStorage.setItem("search_name",document.getElementById("room_name").value);

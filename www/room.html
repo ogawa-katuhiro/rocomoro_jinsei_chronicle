@@ -9,17 +9,19 @@
     <script src="js/room.js"></script>
 </head>
 <body>
-  <input type="button" onclick="aaaaaa()" value="退室">
+  <input type="button" onclick="aaaaaa();" value="退室">
+  <input type="button" onclick="location.href='testRoomCreate.html'" value="aqwsedrfg">
   <p id="admin">あなたはホストです</p>
   <p id="user">参加者一覧</p>
   <table id="asd">
   </table>
 <script>
   async function aaaaaa(){
-    var flag = await roomOut();
+    var flag = await RoomOut();
     if(flag == 1){
-      Delete();
+      await Delete();
     }
+    alert("退室しました");
     location.href='testRoomCreate.html';
   }
   async function view(){
@@ -45,7 +47,6 @@
   }
   tableEle.appendChild(tr);
   }
-  
 }
 
 view();

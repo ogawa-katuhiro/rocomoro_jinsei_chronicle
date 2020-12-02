@@ -40,7 +40,7 @@ function change(){
     });
 }
 
-function Delete(){
+function userDelete(){
   var Datastore = ncmb.DataStore("users");
   var datastore = Datastore.equalTo("user_id",1)
            .fetchAll()
@@ -59,11 +59,50 @@ function MaxId(){
   var Users = ncmb.DataStore("users");
   var user = Users.exists("user_id");
 
-  user.order("user_id",true)
-  .fetchAll()
-  .then(function(results){
+  user.order("user_id",true).fetchAll().then(function(results){
     var object = results[0];
      var max_id = object.get("user_id");
      resist(max_id);
      });
+}
+
+function takeover(code){
+
+  var Users = ncmb.DataStore("users");
+  
+  var user = Number(localStorage.getItem('user_id'));
+
+  Users.equalTo("user_id",user).fetchAll().then(function(results){
+    var object = results[0];
+    if(object.get("takeover_code") !== null){
+      object.set("takeover_code",code);
+      return object.update();
+    }else{
+      object.set("takeover_code",code);
+      object.save();
+    }})
+    .then(function(gameScore){
+    // 保存後の処理
+    alert("保存成功");
+    })
+    .catch(function(err){
+        // エラー処理
+        alert("保存失敗");
+    });
+}
+
+function login(){
+  
+  var Users = ncmb.DataStore("users");
+  
+  var user = Number(localStorage.getItem('user_id'));
+
+  Users.equalTo("user_id",user).fetchAll().then(function(results){
+    var object = results[0];
+    if(object != null){
+      alert("ログイン成功");
+      location.href="accountresist.html";
+    }else{
+      alert("ログイン失敗");
+    }});
 }
