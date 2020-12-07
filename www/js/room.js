@@ -158,28 +158,52 @@ async function AdminFlg(room_id){
 }
 
 async function RoomSearch(){
+
   var Room = ncmb.DataStore("room");
-
   var arr = [];
+  var room_name = sessionStorage.getItem("room_name");
 
-  var room_name = sessionStorage.getItem("search_name");
-
-  await Room.regularExpressionTo("room_name",".*"+room_name+".*").fetchAll().then(function(results){
+  await Room.regularExpressionTo("room_name",".*"+room_name+".*").equalTo("delete_flag",2).order("room_id",true).fetchAll()
+  .then(function(results){
     for (var i = 0; i < results.length; i++) {
               var object = results[i];
+              var id = object.get("room_id");
               var name = object.get("room_name");
+              var comment = object.get("comment");
               var pw = object.get("password");
-              var arr2 = [name,pw];
+              var count = object.get("play_limit");
+              var arr2 = [name,comment,pw,count,id,null];
               arr.push(arr2);
-    }}).then(function(){
-      // 保存後の処理
-      alert("成功");
-      })
+    }})
       .catch(function(){
       // エラー処理
-      alert("失敗");
+      alert("2失敗");
     });
-    return arr;
+
+  var Room_player = ncmb.DataStore("room_player");
+  var u_count = 1;
+  var w = null;
+  var arr3 = [];
+  await Room_player.exists("room_id").order("room_id",true).fetchAll().then(function(results){
+    for (var i = 0; i < results.length; i++) {
+              var object = results[i];
+              if(w == object.get("room_id")){
+                u_count++;
+              }else if(i != 0){
+                arr3.push(u_count);
+                u_count = 1;
+              }
+              w = object.get("room_id");
+    }})
+      .catch(function(){
+      // エラー処理
+      alert("2失敗");
+    });
+  for(var i = 0; i < arr.length; i++){
+    arr[i][5] = arr3[i];
+  }
+  
+  return arr;
 }
 
 async function AdminCheck(){
@@ -206,3 +230,4 @@ async function UserSearch(){
     }});
   return arr;
 }
+

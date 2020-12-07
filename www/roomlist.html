@@ -5,43 +5,126 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="components/loader.js"></script>
     <script src="js/account.js"></script>
+    <script src="js/room.js"></script>
 </head>
 <body>
-  <table id="table">
-  </table>
+  <div class="roomlist" id="roomlist">
+  </div>
   <input type="button" onclick="history.back()" value="戻る">
 </body>
 <script>
+
+
   async function roomview(){
     
   var arr = await RoomSearch();
   var text = "";
 
-  var tableEle = document.getElementById('roomlist');
-  for (var i = 0; i < arr.length; i++) {
-    // テーブルの行を 追加する
-    var tr = document.createElement('tr');
-    for (var j = 0; j < arr[i].length; j++) {
+    var tableEle = document.getElementById('roomlist');
+
+    for(var i = 0; i < arr.length; i++){
+      // テーブルの行を 追加する
+      var table = document.createElement('table');
+
+
+      table.classList.add('table');
+
+      var tr_th = document.createElement('tr');
+      var tr_td = document.createElement('tr');
+
       // テーブルの列を 追加する
-      var td = document.createElement('td');
-      td.innerHTML = arr[i][j];
 
-      tr.appendChild(td);
+    
+      
 
-      //pwアリの場合の画像表示
-      if(j == 1 && arr[i][j] != null){
-        var td2 = document.createElement('td');
+      var th_name = document.createElement('th');
+      th_name.classList.add('th_name');
+      th_name.innerHTML = "ルーム名";
+      tr_th.appendChild(th_name);
+
+      var th_come = document.createElement('th');
+      th_come.classList.add('th_come');
+      th_come.innerHTML = "コメント";
+      tr_th.appendChild(th_come);
+
+      var th_count = document.createElement('th');
+      th_count.classList.add('th_count');
+      th_count.innerHTML = "人数";
+      tr_th.appendChild(th_count);
+
+      var td_name = document.createElement('td');
+      td_name.innerHTML = arr[i][0];
+      tr_td.appendChild(td_name);
+
+      var td_come = document.createElement('td');
+      td_come.innerHTML = arr[i][1];
+      tr_td.appendChild(td_come);
+
+      var td_count = document.createElement('td');
+      var td_now = document.createElement('td');
+      td_now.classList.add('not');
+      var td_max = document.createElement('td');
+      td_max.classList.add('not');
+      td_now.innerHTML = "　　"+arr[i][3]+" /";
+      td_max.innerHTML = arr[i][5];
+      td_count.appendChild(td_now);
+      td_count.appendChild(td_max);
+      tr_td.appendChild(td_count);
+        
+      var td_img = document.createElement('td');
+      td_img.classList.add('not');
+
+        //pwアリの場合の画像表示
+      if(arr[i][2] != null){
         var image = document.createElement('img');
-        image.src = "img/chara1.png";
-        td2.appendChild(image);
-        tr.appendChild(td2);
+        image.classList.add('img');
+        image.src = "img/key.png";
+        td_img.appendChild(image);
       }
-  }
-  tableEle.appendChild(tr);
-  }
+      
+      tr_th.appendChild(td_img);
+
+      var td_button = document.createElement('td');
+      td_button.classList.add('not');
+      var button = document.createElement('input');
+      button.setAttribute("type","button"); 
+      button.setAttribute("onclick","roomInfnc()"); 
+      button.setAttribute("value","参加"); 
+
+      td_button.appendChild(button);
+      tr_td.appendChild(td_button);
+      table.appendChild(tr_th);
+      table.appendChild(tr_td);
+      tableEle.appendChild(table);
+
+    
+    }
   
 }
+
+async function roomInfnc(room_id,pw){
+  var admin_flg = 2;
+  var user_id = Number(localStorage.getItem("user_id"));
+  alert(pw);
+
+  if(pw != null){
+
+    var text = prompt('パスワードを入力してください');
+  
+    if(pw == text){
+    RoomInTo(user_id,room_id,admin_flg);    location.href="room.html";
+    }else{
+    return;
+    }
+  }
+  await RoomInTo(user_id,room_id,admin_flg);   
+  alert("ルームに参加します"); 
+  location.href="room.html";
+}
+
+roomview();
 </script>
 </html>

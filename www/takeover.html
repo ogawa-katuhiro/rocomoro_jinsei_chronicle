@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/takeover.css">
     <title>引き継ぎコード発行</title> 
     <script src="components/loader.js"></script>
     <script src="js/account.js"></script>
@@ -57,19 +58,32 @@ async function takeoverfanc(){
     </script>
 </head> 
 <body>
-    <p>引き継ぎコード</p>
+    <p>引き継ぎコード発行</p>
        <table>
          <tr>
            <td>
-             <p id="code"></p>
+
+             <p id="edit_area"class="box">※引き継ぎコードはここに表示されます</p>
+             <script>
+              
+        </script>
            </td>
          </tr>
-         <tr>
-            <td>
-              <input type = "button" onclick="takeoverfanc();" value = "新規で発行する">
-            </td>  
-         </tr> 
+         <p>※引き継ぎコードは必ずメモをして大切に保管してください</p>
          </table>
-        <button onClick="history.back()">戻る</button>
+         <div class="wrap">
+           <table>
+             <tr>
+               <td>
+         <button id="sha256" onclick="aiueo();"class="button">発行する</button>
+              </td>
+              </tr>
+              <tr>
+              <td>         
+         <button class="button"onClick="location.href='title.html'">戻る</button>
+              </td>
+              </tr>
+           </table>
+<div>
 </body>
 </html>

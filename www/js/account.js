@@ -12,7 +12,7 @@ function resist(max_id){
   
   var user = sessionStorage.getItem('data1');
 
-  users.set("user_name",user);
+  users.set("user_name",user);//"");alert("a"
   users.set("user_id",user_id);
   users.save()
   .then(function(){
