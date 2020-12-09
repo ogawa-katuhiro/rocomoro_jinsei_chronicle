@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/ranking.css" type="text/css">
+  <script src="components/loader.js"></script>
+  <script src="js/rank.js"></script>
+</head>
+<body>
+<!--ヘッター-->
+  <header>
+    <button class="back-btn" onclick="history.back()">もどる
+    </button>
+    <h1 class="title">ランキング</h1>
+  </header>
+
+<!--切り替え-->
+  <select id="select" onChange="view();view2()">
+    <option value="all">総金額</option>
+    <option value="max">最高金額</option>
+    <option value="min">最低金額</option>
+  </select>
+
+<script>    
+  async function view(){
+   var status = await userStatus();
+
+   var rank1_1 = document.getElementById('rank1-1');
+   rank1_1.innerHTML = status[0];
+
+   var rank1_2 = document.getElementById('rank1-2');
+   rank1_2.innerHTML = status[1];
+}
+view();
+</script>
+
+<!--ユーザーランク-->
+<div class="rank" id="rank">
+  <div class="rank1" id="rank1"></div>
+  <div class="rank2">
+    <a  href="HTML/PlayerDate.html">
+      <div class="rank2-1" id="rank1-1"></div>
+    </a>
+      <div class="rank2-2" id="rank1-2"></div>
+  </div>
+</div>
+
+
+<script>
+  async function view2(){
+   var all_status = await allUserStatus();
+   var rank1 = document.getElementById('rank1'); 
+   rank1.innerHTML = all_status[0] + "位";
+
+   var count = 1;
+
+  const element = document.getElementById('ranking');
+  element.remove();
+   var test = document.createElement('div');
+   test.id = 'ranking';//名前
+   test.classList.add("ranking");
+   var aaaa = document.getElementById('aaaa');
+   aaaa.appendChild(test);
+
+   for(var i=1; i<(all_status.length - 1); i = i + 3){
+//組長
+   var elem = document.createElement('div');
+   elem.id = 'rank-list';
+   elem.classList.add("rank-list");
+   var ranking = document.getElementById('ranking');
+   ranking.appendChild(elem);
+//下っ端
+   var elem1_1 = document.createElement('div');
+   var elem1_2 = document.createElement('div');
+   elem1_1.id = 'rank2';//順位
+   elem1_1.innerHTML = count + "位";
+   elem1_1.classList.add("rank1");
+   elem1_2.id = 'rank3';
+   elem1_2.classList.add("rank2");
+   var rank_list = document.getElementById('rank-list');
+   rank_list.appendChild(elem1_1);
+   rank_list.appendChild(elem1_2);
+//下っ端
+   var elem2_1 = document.createElement('div');
+   var link = document.createElement('a');
+   var elem2_2 = document.createElement('div');
+   elem2_1.id = 'rank2-1';//名前
+   link.innerHTML = all_status[i]
+   link.href = "HTML/PlayerDate.html?user_id="+ all_status[i+2]
+   elem2_1.classList.add("rank2-1");
+   elem2_2.id = 'rank2-2';//値
+   elem2_2.innerHTML = all_status[i+1]
+   elem2_2.classList.add("rank2-2");
+   var rank3 = document.getElementById('rank3');
+   elem2_1.appendChild(link);
+   rank3.appendChild(elem2_1);
+   rank3.appendChild(elem2_2);
+
+   count++;
+   }
+}
+view2();
+</script>
+<div id="aaaa">
+<div class="ranking" id="ranking">
+  <!--ランクリスト
+    <div class="rank-list" id="rank-list">
+        <div class="rank1" id="rank2"><p>位</p></div>
+
+        <div class="rank2" id="rank3">
+          <div class="rank2-1" id="rank2-1"></div>
+          <div class="rank2-2" id="rank2-2"></div>
+    </div>-->
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>
