@@ -30,9 +30,11 @@
   
   });
 </script>
-  <p class="room_name" id="room_name"></p>
-  <p class="comment" id="comment"></p>
-  <p class="user_title" id="user_title">参加者一覧</p>
+  <p>ルーム名</p>
+  <p class="p" id="room_name"></p>
+  <p>コメント</p>
+  <p class="p" id="comment"></p>
+  <p id="user_title">参加者一覧</p>
   <div id="table">
   </div>
   <input class="button" type="button" class="startbutton"id="admin" value="ゲーム開始">
@@ -48,8 +50,11 @@
 
 
   async function view(){
+
+  
   var arr = await UserSearch();
   var flg = await AdminCheck();
+  console.log(flg);
 
 
   var room_name = localStorage.getItem("room_name");
@@ -77,8 +82,10 @@
 
   }
 }
-
+TimeCheck();
 view();
+// setInterval(TimeCheck(), 1000);
+// setInterval(view(), 1000);
 </script>
 </body>
 </html>

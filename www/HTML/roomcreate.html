@@ -31,12 +31,19 @@
 
         var user_id = Number(localStorage.getItem('user_id'));
         var room_name = document.getElementById("room_name").value;
+        if(room_name == ""){
+          room_name = "なし";
+        }
         var count = Number(document.getElementById("count").value);
         var password = document.getElementById("password").value;
         if(password == ""){
           password = null;
         }
+        
         var comment = document.getElementById("comment").value;
+        if(comment == ""){
+          comment = "なし";
+        }
 
         var max_id = await RoomMaxId();
 
@@ -44,13 +51,12 @@
 
         var adminflg = await AdminFlg(max_id);
 
-        await roomInTo(user_id,max_id,adminflg);
-
         localStorage.setItem("room_id",max_id);
+        localStorage.setItem("room_name",room_name);
+        localStorage.setItem("comment",comment);
 
-    }
-    function btnRoomCreate(){
-      location.href='room.html'
+        await RoomInTo(user_id,max_id,adminflg);
+
     }
     </script>
 </body>

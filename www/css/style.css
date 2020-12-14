@@ -9,16 +9,14 @@ div.roomlist{
  height:500px;
  overflow-y: scroll;
 }
-.room_name{
+.p{
   border: solid 1px;
   width: 300px;
   text-align: center;
   margin: auto;
   margin-top: 20px;
 }
-.comment{
-  border: solid 1px;
-  width: 300px;
+p{
   text-align: center;
   margin: auto;
   margin-top: 20px;

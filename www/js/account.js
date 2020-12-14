@@ -9,16 +9,21 @@ function resist(max_id){
   var Users = ncmb.DataStore("users");
   var users = new Users();
   var user_id = max_id+1;
+  var date = new Date();
+  var mobile = ""+date.getFullYear()+date.getMonth()+date.getDate()+date.getHours()+date.getMinutes()+date.getSeconds()+user_id;
+  localStorage.setItem("mobile",mobile);
   
   var user = sessionStorage.getItem('data1');
 
   users.set("user_name",user);//"");alert("a"
+  users.set("user_id",user_id);
   users.set("all_money",0);
   users.set("count",0);
   users.set("game_money",0);
   users.set("game_count",0);
+  users.set("mobile",mobile);
   users.set("max_money",0);
-  users.set("min_money",);
+  users.set("min_money",null);
   users.save()
   .then(function(){
     // 保存後の処理
@@ -95,16 +100,51 @@ function takeover(code){
         alert("保存失敗");
     });
 }
+function takeoverEntry(){
+
+  var Users = ncmb.DataStore("users");
+
+  var code = document.getElementById("code").value;
+
+  Users.equalTo("takeover_code",code).fetch().then(function(results){
+    var object = results;
+
+    if(object != null){
+
+      var date = new Date();
+      console.log("1");
+      var mobile = ""+date.getFullYear()+date.getMonth()+date.getDate()+date.getHours()+date.getMinutes()+date.getSeconds()+object.get("user_id");
+      console.log("2");
+
+      console.log(mobile);
+      localStorage.setItem("mobile",mobile);
+
+      object.set("mobile",mobile);
+      return object.update();
+    }
+    })
+    .then(function(){
+    // 保存後の処理
+    location.href="codecomplete.html";
+    })
+    .catch(function(err){
+        // エラー処理
+        alert("保存失敗");
+    });
+}
 
 function login(){
   
   var Users = ncmb.DataStore("users");
   
-  var user = Number(localStorage.getItem('user_id'));
+  var mobile = localStorage.getItem('mobile');
 
-  Users.equalTo("user_id",user).fetchAll().then(function(results){
+  Users.equalTo("mobile",mobile).fetchAll().then(function(results){
     var object = results[0];
     if(object != null){
+      var user_id = object.get("user_id");
+      console.log(user_id);
+      localStorage.setItem('user_id',user_id);
       alert("ログイン成功");
       location.href="Menu.html";
     }else{

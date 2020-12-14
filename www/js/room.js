@@ -26,12 +26,7 @@ function Create(room_name,count,password,comment,max_id){
 
   var Room = ncmb.DataStore("room");
   var room = new Room();
-  if(room_name == ""){
-   room_name = "なし"
-  }
-  if(comment == ""){
-   comment = "なし"
-  }
+  
 
   var room_id = max_id;
 
@@ -79,13 +74,12 @@ async function RoomInTo(user_id,room_id,adminflg){
    roomplayer.save()
   .then(function(){
     // 保存後の処理
-    alert("ルーム参加成功");
+    location.href='room.html';
     })
-    .catch(function(err){
-     // エラー処理
-     alert(err);
+    .catch(function(){
+        // エラー処理
+        alert("成功");
     });
-   
 }
 
 async function RoomOut(){
@@ -231,7 +225,7 @@ async function AdminCheck(){
               var object = results[0];
               admin_flg = object.get("admin_flg");
     });
-  return admin_flg;
+    return admin_flg;
 }
 
 async function UserSearch(){
@@ -303,6 +297,33 @@ function EndResist(){
     object.set("game_money",money);
     object.set("game_count",totalstep);
     return object.update();
+  });
+}
+
+function EndTime(){
+  var room = ncmb.DataStore("room");
+  var room_id = Number(localStorage.getItem("room_id"));
+  var now = new Date();
+  var end = date.setHours(date.getHours() + 3);
+
+  room.equalTo("room_id",room_id).fetch().then(function(results){
+    var object = results;
+    object.set("end_time",now);
+    return object.update();
+  });
+
+}
+
+function TimeCheck(){
+ var room = ncmb.DataStore("room");
+  var room_id = Number(localStorage.getItem("room_id"));
+  var time = null;
+
+  room.equalTo("room_id",room_id).fetch().then(function(results){
+    var object = results;
+    if(object.get("end_time") != null){
+      location.href="Menu.html"
+    }
   });
 }
 

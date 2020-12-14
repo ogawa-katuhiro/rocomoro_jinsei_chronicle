@@ -29,12 +29,14 @@
   
   });
 </script>
-  <p class="room_name" id="room_name"></p>
-  <p class="comment" id="comment"></p>
+  <p>ルーム名</p>
+  <p class="p" id="room_name"></p>
+  <p>コメント</p>
+  <p class="p" id="comment"></p>
   <p class="user_title" id="user_title">参加者一覧</p>
   <div id="table">
   </div>
-  <input type="button" class="startbutton"id="admin" value="ゲーム開始">
+  <input type="button" class="startbutton"id="admin" onclick="EndTime()" value="ゲーム開始">
 <script>
   async function aaaaaa(){
     var flag = await RoomOut();
@@ -77,8 +79,12 @@
 
   }
 }
+async function startfnc(){
+ var time = 
+}
 
-view();
+setInterval(startfnc(), 1000);
+setInterval(view(), 1000);
 </script>
 </body>
 </html>

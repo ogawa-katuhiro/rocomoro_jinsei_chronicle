@@ -15,7 +15,6 @@
   <div class="roomlist" id="roomlist">
   </div>
   <input type="button" onclick="history.back()" value="戻る">
-  <input type="button" onclick="send()" value="遷移">
 </body>
 <script>
 
@@ -119,10 +118,12 @@ async function roomInfnc(i){
       return;
     }
   }
-  await RoomInTo(user_id,room_id,admin_flg);
+  
   localStorage.setItem("room_id",room_id);
   localStorage.setItem("room_name",room_name);
   localStorage.setItem("comment",comment);
+
+  await RoomInTo(user_id,room_id,admin_flg);
 }
 
 function send(){
