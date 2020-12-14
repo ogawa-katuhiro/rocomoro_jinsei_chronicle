@@ -3,7 +3,7 @@
 
 body{
   background-image: url("../Photo/haikei.png");
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-size: cover;
 }
 .wrap {
   height: 100%;
