@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
      <link rel="stylesheet" href="../css/takeover.css">
+<!--ルーム作成の画面-->
+
     <script>
         //ボタンを押下した時の処理
      function btnRoomCreate(){
 
        //ローカルストレージに値をセットする処理
         localStorage.setItem('room', document.getElementById("inputRoom").value);
-        
-        document.getElementById("inputRoom").value = "";
     }
     </script>
 </head>

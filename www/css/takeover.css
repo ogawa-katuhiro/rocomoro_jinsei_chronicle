@@ -1,7 +1,9 @@
 /* This is a CSS file */
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+
 body{
   background-image: url("../Photo/haikei.png");
-  background-size: cover;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 .wrap {
   height: 100%;

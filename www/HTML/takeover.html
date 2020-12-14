@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <title>引き継ぎコード発行</title>  
-    <link rel="stylesheet" href="../css/takeover.css">  
+    <link rel="stylesheet" href="../css/takeover.css">
+    <!--引き継ぎコード発行-->  
     <script>
      //ニフクラのDBからユーザーIDの検索 
 
@@ -20,9 +21,8 @@
         //ログイン時に取ってきたユーザーID(ここは後でDBに保存してる値に変える！)
           
 
-        
         //日付とユーザーIDの組み合わせ
-        var aa=day+a;
+        var aa = day + a;
               
         const buff = new Uint8Array([].map.call(aa, (c) => c.charCodeAt(0))).buffer;
 
@@ -44,11 +44,7 @@
        <table>
          <tr>
            <td>
-
              <p id="edit_area"class="box">※引き継ぎコードはここに表示されます</p>
-             <script>
-              
-        </script>
            </td>
          </tr>
          <p>※引き継ぎコードは必ずメモをして大切に保管してください</p>
@@ -57,7 +53,7 @@
            <table>
              <tr>
                <td>
-         <button id="sha256" onclick="aiueo();"class="button">発行する</button>
+                  <button id="sha256" onclick="aiueo();"class="button">発行する</button>
               </td>
               </tr>
               <tr>

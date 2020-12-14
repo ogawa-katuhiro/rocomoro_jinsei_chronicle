@@ -13,7 +13,8 @@
 </script>
 <!--タイトルを表示する画面-->
 </head>
-<body>  
+<body>
+  <img id="a" src="../Photo/ikiriotaku.jpg" class="event" ondblclick="aaa();"/>
   <div class="logo">
       <img src="../Photo/logo.png" class="image_size_m"/>
   </div>
@@ -25,12 +26,20 @@
       <P><a href="accountresist.html">新規登録はこちら</a></p>
     </div>
   </div>
-  <img id="event" src="../Photo/ikiriotaku.jpg" class="event"/>
+
   <script>
+    function aaa(){
+      location.href="event1.html";
+    }
      //画像が2回押された時イベント発動
-      document.getElementById('event').addEventListener('dblclick',function(){
-        window.open('event1.html');
-     });   
+    //  $(document).ready(function()){
+
+    //   $(document).on('click','img', function(){
+    //     alert('a');
+    //     location.href="event1.html";
+    //     //window.open('event1.html');
+    //  }); 
+    //  };
 </script>
 </body>
 </html>

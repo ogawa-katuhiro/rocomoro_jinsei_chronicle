@@ -1,2 +1,5 @@
-/**/
+body {
+  background-image: url("../Photo/nikukyu.png");
+  background-size:cover; 
+}
 
