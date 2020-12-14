@@ -112,11 +112,8 @@ function takeoverEntry(){
     if(object != null){
 
       var date = new Date();
-      console.log("1");
       var mobile = ""+date.getFullYear()+date.getMonth()+date.getDate()+date.getHours()+date.getMinutes()+date.getSeconds()+object.get("user_id");
-      console.log("2");
 
-      console.log(mobile);
       localStorage.setItem("mobile",mobile);
 
       object.set("mobile",mobile);
