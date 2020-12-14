@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <title>引き継ぎコード発行</title>  
+    <link rel="stylesheet" href="../css/takeover.css">
+    <!--引き継ぎコード発行-->  
+    <script>
+     //ニフクラのDBからユーザーIDの検索 
+
+
+  //ユーザーIDと日付でハッシュ化している処理 
+     async function sha256(a) {
+                  
+        //日付のハッシュ化
+        var today = new Date();
+        var day = today.getFullYear()+""+(today.getMonth()+1)+""+today.getDate();
+       
+        //ログイン時に取ってきたユーザーID(ここは後でDBに保存してる値に変える！)
+          
+
+        //日付とユーザーIDの組み合わせ
+        var aa = day + a;
+              
+        const buff = new Uint8Array([].map.call(aa, (c) => c.charCodeAt(0))).buffer;
+
+        const digest = await crypto.subtle.digest('sha-1', buff);
+        
+        return [].map.call(new Uint8Array(digest), x => ('00' + x.toString(16)).slice(-2)).join('');
+         
+}       //ハッシュ化の処理
+        function aiueo(){
+        (async () => {
+        const digest = await sha256("kintubaki");
+      document.getElementById('edit_area').textContent=digest;
+ })
+ ()};
+    </script>
+</head> 
+<body>
+    <p>引き継ぎコード発行</p>
+       <table>
+         <tr>
+           <td>
+             <p id="edit_area"class="box">※引き継ぎコードはここに表示されます</p>
+           </td>
+         </tr>
+         <p>※引き継ぎコードは必ずメモをして大切に保管してください</p>
+         </table>
+         <div class="wrap">
+           <table>
+             <tr>
+               <td>
+                  <button id="sha256" onclick="aiueo();"class="button">発行する</button>
+              </td>
+              </tr>
+              <tr>
+              <td>         
+         <button class="button"onClick="location.href='title.html'">戻る</button>
+              </td>
+              </tr>
+           </table>
+<div>
+</body> 
+</html>
