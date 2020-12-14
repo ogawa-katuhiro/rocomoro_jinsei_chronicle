@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/status.css" type="text/css">
+  <script src="components/loader.js"></script>
+  <script src="js/status.js"></script>
+</head>
+<body>
+<!--ヘッター-->
+  <header>
+    <button class="back-btn" onclick="history.back()">もどる
+    </button>
+    <h1 class="title">プレイヤー情報</h1>
+  </header>
+
+  <script>
+  async function view(){
+   var statusA = await plyerStatusA();
+
+   var status1 = document.getElementById('status1');
+   status1.innerHTML = statusA[2];
+
+   var status2 = document.getElementById('status2');
+   status2.innerHTML = statusA[1];
+   
+   var status2 = document.getElementById('status0-1');
+   status0_1.innerHTML = statusA[0]+"位";
+}
+view();
+
+  async function view1(){
+   var statusB = await plyerStatusB();
+
+   var status3 = document.getElementById('status3');
+   status3.innerHTML = statusB[1];
+   
+   var status2 = document.getElementById('status0-2');
+   status0_2.innerHTML = statusB[0]+"位";
+}
+view1();
+
+  async function view2(){
+   var statusC = await plyerStatusC();
+
+   var status4 = document.getElementById('status4');
+   status4.innerHTML = statusC[1];
+   
+   var status2 = document.getElementById('status0-3');
+   status0_3.innerHTML = statusC[0]+"位";
+}
+view2();
+  </script>
+  <!--情報-->
+  <div class="status_name" id="status1"></div>
+  
+<div class="all">
+  <div class="money">
+    <div class="status1" id="status0_1"></div>
+    <div class="status2">
+      <div class="status2-1">総金額</div>
+      <div class="status2-2" id="status2"></div>
+   </div>
+  </div>
+  <div class="money">
+    <div class="status1"  id="status0_2"></div>
+    <div class="status2">
+      <div class="status2-1">1Game最高金額</div>
+      <div class="status2-2" id="status3"></div>
+   </div>
+  </div>
+  <div class="money">
+    <div class="status1"  id="status0_3"></div>
+    <div class="status2">
+      <div class="status2-1">1Game最低金額</div>
+      <div class="status2-2" id="status4"></div>
+    </div>
+  </div>
+</div>
+</body>

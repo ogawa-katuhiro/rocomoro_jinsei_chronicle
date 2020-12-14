@@ -89,7 +89,7 @@ view();
    var elem2_2 = document.createElement('div');
    elem2_1.id = 'rank2-1';//名前
    link.innerHTML = all_status[i]
-   link.href = "HTML/PlayerDate.html?user_id="+ all_status[i+2]
+   link.href = "PlayerDate?user_id="+ all_status[i+2];
    elem2_1.classList.add("rank2-1");
    elem2_2.id = 'rank2-2';//値
    elem2_2.innerHTML = all_status[i+1]
@@ -106,10 +106,9 @@ view2();
 </script>
 <div id="aaaa">
 <div class="ranking" id="ranking">
-  <!--ランクリスト
+  <!--ランクリスト 
     <div class="rank-list" id="rank-list">
         <div class="rank1" id="rank2"><p>位</p></div>
-
         <div class="rank2" id="rank3">
           <div class="rank2-1" id="rank2-1"></div>
           <div class="rank2-2" id="rank2-2"></div>
