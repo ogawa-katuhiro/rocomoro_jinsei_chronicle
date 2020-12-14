@@ -11,7 +11,7 @@
      function btnResistClick(){
 
        //ローカルストレージに値をセットする処理
-        localStorage.setItem('data1', document.getElementById("inputName").value);
+        sessionStorage.setItem('data1', document.getElementById("inputName").value);
         
         document.getElementById("inputName").value = "";
     }

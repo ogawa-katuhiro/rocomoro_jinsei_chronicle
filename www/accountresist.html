@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="floating-labels.css" rel="stylesheet">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="JavaScript/auth.js"></script>
+    <link rel="stylesheet" href="css/takeover.css">
+    <script>
+     function btnResistClick(){
+        sessionStorage.setItem('data1', document.getElementById("inputName").value);
+        
+        document.getElementById("inputName").value = "";
+    }
+    </script>
+
+
+<title>登録画面</title>
+</head>
+<body>
+  <div class="text-center mb-4">
+    <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">新規アカウント登録画面</h1>
+  </div>
+  <table>
+    <tr>
+      <th>ユーザー名</th>
+    </tr>
+    <tr>
+        <td>
+          <input type="text" id="inputName" class="form-control" placeholder="user name" required>
+        </td>
+    </tr>    
+    </table>
+  <div>
+    <button id ="resist"onClick="btnResistClick(); location.href='accountconfirm.html'"class="btn btn-lg btn-primary btn-block" >登録</button>
+    <input type ="button" value ="戻る"onClick="history.back()"class="btn btn-lg btn-primary btn-block">
+  <div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>
+  window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
+</script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script><script src="/docs/4.3/assets/js/vendor/anchor.min.js"></script>
+<script src="/docs/4.3/assets/js/vendor/clipboard.min.js"></script>
+<script src="/docs/4.3/assets/js/vendor/bs-custom-file-input.min.js"></script>
+<script src="/docs/4.3/assets/js/src/application.js"></script>
+<script src="/docs/4.3/assets/js/src/search.js"></script>
+<script src="/docs/4.3/assets/js/src/ie-emulation-modes-warning.js"></script>
+</body>
+</html>

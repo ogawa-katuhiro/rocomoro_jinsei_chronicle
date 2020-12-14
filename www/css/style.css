@@ -9,16 +9,14 @@ div.roomlist{
  height:500px;
  overflow-y: scroll;
 }
-.room_name{
+.p{
   border: solid 1px;
   width: 300px;
   text-align: center;
   margin: auto;
   margin-top: 20px;
 }
-.comment{
-  border: solid 1px;
-  width: 300px;
+p{
   text-align: center;
   margin: auto;
   margin-top: 20px;
@@ -44,7 +42,7 @@ td:not(.not){
 
 th{
   border: solid 1px;
-  width: 90px;
+  width: 88px;
 }
 td.user{
   border: solid 1px;
@@ -71,4 +69,8 @@ div.user{
  background: #ccc;
  border-radius: 10px;
  box-shadow: none;
+}
+.gamestart{
+  color: blue;
+  text-decoration: underline;
 }

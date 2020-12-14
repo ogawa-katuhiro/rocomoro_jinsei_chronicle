@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="../css/takeover.css">  
+    <link rel="stylesheet" href="../components/loader.css">
+    <link rel="stylesheet" href="../css/takeover.css">
+    <script src="../components/loader.js"></script>
+    <script src="../js/account.js"></script>
     <!--データ引継ぎのコード入力画面-->
     <script>
   
@@ -28,7 +31,7 @@
       <div class="wrap">
         <tr>
           <td>
-        <button class="button"onClick="location.href='codecomplete.html'">引き継ぎ</button>
+        <button class="button"onClick="takeoverEntry()">引き継ぎ</button>
         </td>
         <tr>
           <td>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/takeover.css">
+    <script src="../components/loader.js"></script>
+    <script src="../js/account.js"></script>
+    <script src="../js/room.js"></script>
+</head>
+<body>
+  <div class="roomlist" id="roomlist">
+  </div>
+  <input type="button" onclick="history.back()" value="戻る">
+</body>
+<script>
+
+
+  async function roomview(){
+    
+  var arr = await RoomSearch();
+  var text = "";
+
+    var tableEle = document.getElementById('roomlist');
+
+    for(var i = 0; i < arr.length; i++){
+      // テーブルの行を 追加する
+      var table = document.createElement('table');
+
+
+      table.classList.add('table');
+
+      var tr_th = document.createElement('tr');
+      var tr_td = document.createElement('tr');
+
+      // テーブルの列を 追加する
+
+      var th_name = document.createElement('th');
+      th_name.classList.add('th_name');
+      th_name.innerHTML = "ルーム名";
+      tr_th.appendChild(th_name);
+
+      var th_come = document.createElement('th');
+      th_come.classList.add('th_come');
+      th_come.innerHTML = "コメント";
+      tr_th.appendChild(th_come);
+
+      var th_count = document.createElement('th');
+      th_count.classList.add('th_count');
+      th_count.innerHTML = "人数";
+      tr_th.appendChild(th_count);
+
+      var td_name = document.createElement('td');
+      td_name.innerHTML = arr[i][0];
+      tr_td.appendChild(td_name);
+
+      var td_come = document.createElement('td');
+      td_come.innerHTML = arr[i][1];
+      tr_td.appendChild(td_come);
+
+      var td_count = document.createElement('td');
+      
+      td_count.innerHTML = arr[i][5]+"/"+arr[i][3];
+      tr_td.appendChild(td_count);
+        
+      var td_img = document.createElement('td');
+      td_img.classList.add('not');
+
+        //pwアリの場合の画像表示
+      if(arr[i][2] != null){
+        var image = document.createElement('img');
+        image.classList.add('img');
+        image.src = "../img/key.png";
+        td_img.appendChild(image);
+      }
+      
+      tr_th.appendChild(td_img);
+
+      var td_button = document.createElement('td');
+      td_button.classList.add('not');
+      var button = document.createElement('input');
+      button.setAttribute("type","button"); 
+      button.setAttribute("onclick","roomInfnc("+i+")"); 
+      button.setAttribute("value","参加"); 
+
+      if(arr[i][3] > arr[i][5]){
+		    // 満員でない場合参加ボタン表示
+		    td_button.appendChild(button);
+      }
+      
+      tr_td.appendChild(td_button);
+      table.appendChild(tr_th);
+      table.appendChild(tr_td);
+      tableEle.appendChild(table);
+
+    
+    }
+  
+}
+
+async function roomInfnc(i){
+  var arr = await RoomSearch();
+  var admin_flg = 2;
+  var user_id = Number(localStorage.getItem("user_id"));
+  var room_id  = arr[i][4];
+  var pw = arr[i][2];
+  var room_name = arr[i][0];
+  var comment = arr[i][1];
+  if(pw != null){
+
+    var text = prompt('パスワードを入力してください');
+  
+    if(pw != text){
+      alert("パスワードが違います");
+      return;
+    }
+  }
+  
+  localStorage.setItem("room_id",room_id);
+  localStorage.setItem("room_name",room_name);
+  localStorage.setItem("comment",comment);
+
+  await RoomInTo(user_id,room_id,admin_flg);
+}
+
+function send(){
+  location.href='room.html';
+}
+
+roomview();
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script src="js/room.js"></script>
+</head>
+<body>
+    <table id="roomlist">
+</body>
+<script>
+  async function roomview(){
+    
+  var arr = await roomSearch();
+  var text = "";
+
+  var tableEle = document.getElementById('roomlist');
+  for (var i = 0; i < arr.length; i++) {
+    // テーブルの行を 追加する
+    var tr = document.createElement('tr');
+    for (var j = 0; j < arr[i].length; j++) {
+      // テーブルの列を 追加する
+      var td = document.createElement('td');
+      td.innerHTML = arr[i][j];
+
+      tr.appendChild(td);
+
+      //pwアリの場合の画像表示
+      if(j == 1 && arr[i][j] != null){
+        var td2 = document.createElement('td');
+        var image = document.createElement('img');
+        image.src = "img/chara1.png";
+        td2.appendChild(image);
+        tr.appendChild(td2);
+      }
+  }
+  tableEle.appendChild(tr);
+  }
+  
+}
+
+roomview();
+</script>
+</html>
