@@ -270,7 +270,6 @@ async function EndView(){
   await user.in("user_id",users).order("game_money",true).fetchAll().then(function(results){
     for (var i = 0; i < results.length; i++) {
               var object = results[i];
-              alert(object.get("game_money"));
               arr[i][0] = object.get("user_id");
               arr[i][1] = object.get("game_money");
               arr[i][2] = object.get("game_count");
