@@ -26,6 +26,12 @@ function Create(room_name,count,password,comment,max_id){
 
   var Room = ncmb.DataStore("room");
   var room = new Room();
+  if(room_name == ""){
+   room_name = "なし"
+  }
+  if(comment == ""){
+   comment = "なし"
+  }
 
   var room_id = max_id;
 
@@ -37,11 +43,10 @@ function Create(room_name,count,password,comment,max_id){
   room.set("delete_flag",2);
   room.save().then(function(room){
     // 保存後の処理
-    alert(room);
+    location.href='room.html'
     })
     .catch(function(err){
      // エラー処理
-     alert(err);
     });
    
 }
@@ -185,20 +190,27 @@ async function RoomSearch(){
     });
 
   var Room_player = ncmb.DataStore("room_player");
-  var u_count = 1;
-  var w = null;
+  
+  var rooms = [];
+  for(var i = 0; i < arr.length;i++){
+    rooms.push(arr[i][4]);
+  }
+  var u_count = 0;
   var arr3 = [];
-  await Room_player.exists("room_id").order("room_id",true).fetchAll().then(function(results){
+  await Room_player.in("room_id",rooms).order("room_id",true).fetchAll().then(function(results){
+    var w = results[0].get("room_id");
     for (var i = 0; i < results.length; i++) {
               var object = results[i];
               if(w == object.get("room_id")){
                 u_count++;
-              }else if(i != 0){
+              }else{
                 arr3.push(u_count);
                 u_count = 1;
               }
               w = object.get("room_id");
-    }})
+    }
+    arr3.push(u_count);
+    })
       .catch(function(){
       // エラー処理
       alert("2失敗");

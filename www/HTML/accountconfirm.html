@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="../css/takeover.css">
+    <link rel="stylesheet" href="../components/loader.css">
+    <script src="../components/loader.js"></script>
+    <script src="../js/account.js"></script>
 
 
     <!--アカウント登録確認の画面-->
@@ -15,7 +18,7 @@
           <th>ユーザー名</th>  
           <script>
           //ローカルストレージから値をとってきている処理         
-            var text_message = localStorage.getItem('data1');
+            var text_message = sessionStorage.getItem('data1');
           </script>
       </tr>
   </table>
@@ -27,7 +30,7 @@
     </script>
     </div>
   <div class="wrap">
-    <button class="button" onClick="location.href='accountcomplete.html'">登録する</button>
+    <button class="button" onClick="MaxId()">登録する</button>
     <button onClick="history.back()"class="button">戻る</button>
     </div>
 </body>

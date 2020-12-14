@@ -44,7 +44,7 @@ td:not(.not){
 
 th{
   border: solid 1px;
-  width: 90px;
+  width: 88px;
 }
 td.user{
   border: solid 1px;
@@ -71,4 +71,8 @@ div.user{
  background: #ccc;
  border-radius: 10px;
  box-shadow: none;
+}
+.gamestart{
+  color: blue;
+  text-decoration: underline;
 }

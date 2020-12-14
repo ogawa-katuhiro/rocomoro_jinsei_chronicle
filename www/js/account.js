@@ -13,7 +13,12 @@ function resist(max_id){
   var user = sessionStorage.getItem('data1');
 
   users.set("user_name",user);//"");alert("a"
-  users.set("user_id",user_id);
+  users.set("all_money",0);
+  users.set("count",0);
+  users.set("game_money",0);
+  users.set("game_count",0);
+  users.set("max_money",0);
+  users.set("min_money",);
   users.save()
   .then(function(){
     // 保存後の処理
@@ -101,7 +106,7 @@ function login(){
     var object = results[0];
     if(object != null){
       alert("ログイン成功");
-      location.href="accountresist.html";
+      location.href="Menu.html";
     }else{
       alert("ログイン失敗");
     }});

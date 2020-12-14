@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="components/loader.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="components/loader.js"></script>
-    <script src="js/account.js"></script>
-    <script src="js/room.js"></script>
+    <link rel="stylesheet" href="../components/loader.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/takeover.css">
+    <script src="../components/loader.js"></script>
+    <script src="../js/account.js"></script>
+    <script src="../js/room.js"></script>
 </head>
 <body>
   <div class="roomlist" id="roomlist">
@@ -62,14 +63,8 @@
       tr_td.appendChild(td_come);
 
       var td_count = document.createElement('td');
-      var td_now = document.createElement('td');
-      td_now.classList.add('not');
-      var td_max = document.createElement('td');
-      td_max.classList.add('not');
-      td_max.innerHTML = "　　"+arr[i][5]+" /";
-      td_now.innerHTML = arr[i][3];
-      td_count.appendChild(td_max);
-      td_count.appendChild(td_now);
+      
+      td_count.innerHTML = arr[i][5]+"/"+arr[i][3];
       tr_td.appendChild(td_count);
         
       var td_img = document.createElement('td');
@@ -79,7 +74,7 @@
       if(arr[i][2] != null){
         var image = document.createElement('img');
         image.classList.add('img');
-        image.src = "img/key.png";
+        image.src = "../img/key.png";
         td_img.appendChild(image);
       }
       
