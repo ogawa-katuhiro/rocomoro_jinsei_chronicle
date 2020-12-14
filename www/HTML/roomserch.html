@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../css/takeover.css">
+    <script>
+          //ボタンを押下した時の処理
+     function btnRoomSearch(){
+
+       //ローカルストレージに値をセットする処理
+        localStorage.setItem('search', document.getElementById("Roomsearch").value);
+        
+        document.getElementById("Roomsearch").value = "";
+    }
+    </script>
+</head>
+<body>
+   <button class="button" id="roomSerch"onClick="btnRoomSearch() location.href='room.html'" >ルーム検索</button>
+    <button onClick="location.href='menu.html'">戻る</button>
+</body>
+</html>
