@@ -38,7 +38,7 @@
         }
         var comment = document.getElementById("comment").value;
 
-        var max_id = await MaxId();
+        var max_id = await RoomMaxId();
 
         await Create(room_name,count,password,comment,max_id);
 
@@ -47,6 +47,7 @@
         await roomInTo(user_id,max_id,adminflg);
 
         localStorage.setItem("room_id",max_id);
+
     }
     function btnRoomCreate(){
       location.href='room.html'

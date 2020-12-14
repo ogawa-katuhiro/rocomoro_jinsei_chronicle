@@ -18,16 +18,29 @@
     <input type="button" onclick="location.href='accountresist.html'"value="アカウント登録">
     <input type="button" onclick="location.href='accountchange.html'"value="アカウント変更">
     <input type="button" onclick="location.href='takeover.html'"value="引継ぎ">
-     <input type="button" onclick="login()"value="ログイン">
+    <input type="button" onclick="login()"value="ログイン">
+    <input type="button" onclick="endview();"value="終了">
 
 </body>
 <script>
-
-localStorage.setItem("user_id",002);
+localStorage.clear();
+localStorage.setItem("user_id",1);
+localStorage.setItem("room_id",10);
+localStorage.setItem("Money",100);
+localStorage.setItem("totalStep",200);
 
 function resist(){
   sessionStorage.setItem("search_name",document.getElementById("room_name").value);
   location.href='testroomsearch.html';
+}
+
+async function endview(){
+  await EndResist();
+  var arr = await EndView();
+  for(var i = 0; i < arr.length; i++){
+  alert(arr[i][1]);
+  alert(arr[i][2]);
+  }
 }
 </script>
 </html>

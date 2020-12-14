@@ -14,6 +14,7 @@
   <div class="roomlist" id="roomlist">
   </div>
   <input type="button" onclick="history.back()" value="戻る">
+  <input type="button" onclick="send()" value="遷移">
 </body>
 <script>
 
@@ -36,9 +37,6 @@
       var tr_td = document.createElement('tr');
 
       // テーブルの列を 追加する
-
-    
-      
 
       var th_name = document.createElement('th');
       th_name.classList.add('th_name');
@@ -68,10 +66,10 @@
       td_now.classList.add('not');
       var td_max = document.createElement('td');
       td_max.classList.add('not');
-      td_now.innerHTML = "　　"+arr[i][3]+" /";
-      td_max.innerHTML = arr[i][5];
-      td_count.appendChild(td_now);
+      td_max.innerHTML = "　　"+arr[i][5]+" /";
+      td_now.innerHTML = arr[i][3];
       td_count.appendChild(td_max);
+      td_count.appendChild(td_now);
       tr_td.appendChild(td_count);
         
       var td_img = document.createElement('td');
@@ -91,10 +89,14 @@
       td_button.classList.add('not');
       var button = document.createElement('input');
       button.setAttribute("type","button"); 
-      button.setAttribute("onclick","roomInfnc()"); 
+      button.setAttribute("onclick","roomInfnc("+i+")"); 
       button.setAttribute("value","参加"); 
 
-      td_button.appendChild(button);
+      if(arr[i][3] > arr[i][5]){
+		    // 満員でない場合参加ボタン表示
+		    td_button.appendChild(button);
+      }
+      
       tr_td.appendChild(td_button);
       table.appendChild(tr_th);
       table.appendChild(tr_td);
@@ -105,24 +107,31 @@
   
 }
 
-async function roomInfnc(room_id,pw){
+async function roomInfnc(i){
+  var arr = await RoomSearch();
   var admin_flg = 2;
   var user_id = Number(localStorage.getItem("user_id"));
-  alert(pw);
-
+  var room_id  = arr[i][4];
+  var pw = arr[i][2];
+  var room_name = arr[i][0];
+  var comment = arr[i][1];
   if(pw != null){
 
     var text = prompt('パスワードを入力してください');
   
-    if(pw == text){
-    RoomInTo(user_id,room_id,admin_flg);    location.href="room.html";
-    }else{
-    return;
+    if(pw != text){
+      alert("パスワードが違います");
+      return;
     }
   }
-  await RoomInTo(user_id,room_id,admin_flg);   
-  alert("ルームに参加します"); 
-  location.href="room.html";
+  await RoomInTo(user_id,room_id,admin_flg);
+  localStorage.setItem("room_id",room_id);
+  localStorage.setItem("room_name",room_name);
+  localStorage.setItem("comment",comment);
+}
+
+function send(){
+  location.href='room.html';
 }
 
 roomview();

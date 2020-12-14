@@ -5,16 +5,36 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="components/loader.js"></script>
     <script src="js/room.js"></script>
 </head>
 <body>
   <input type="button" onclick="aaaaaa();" value="退室">
-  <input type="button" onclick="location.href='testRoomCreate.html'" value="aqwsedrfg">
-  <p id="admin">あなたはホストです</p>
-  <p id="user">参加者一覧</p>
-  <table id="asd">
-  </table>
+  <button id="pass">メニュー</button>
+  <button onclick="history.back()">戻る</button>
+<script>
+
+       //ここからパスワード変更
+    const btn = document.getElementById('pass');
+  
+    btn.addEventListener('click', function() {
+  
+    var text = prompt('パスワード入力');
+
+    if(text != null){
+
+      RoomChange(text);
+    }
+  
+  });
+</script>
+  <p class="room_name" id="room_name"></p>
+  <p class="comment" id="comment"></p>
+  <p class="user_title" id="user_title">参加者一覧</p>
+  <div id="table">
+  </div>
+  <input type="button" class="startbutton"id="admin" value="ゲーム開始">
 <script>
   async function aaaaaa(){
     var flag = await RoomOut();
@@ -24,9 +44,19 @@
     alert("退室しました");
     location.href='testRoomCreate.html';
   }
+
+
   async function view(){
-  var arr = await userSearch();
+  var arr = await UserSearch();
   var flg = await AdminCheck();
+
+
+  var room_name = localStorage.getItem("room_name");
+  var comment = localStorage.getItem("comment");
+
+  document.getElementById("room_name").innerHTML = room_name;
+  document.getElementById("comment").innerHTML = comment;
+
   var text = "";
   if(flg === 1){
 		// blockで表示
@@ -35,17 +65,15 @@
 		// noneで非表示
 		admin.style.display ="none";
 	}
-  var tableEle = document.getElementById('asd');
+  var table = document.getElementById("table");
   for (var i = 0; i < arr.length; i++) {
-    // テーブルの行を 追加する
-    var tr = document.createElement('tr');
-    for (var j = 0; j < arr.length; j++) {
-      // テーブルの列を 追加する
-      var td = document.createElement('td');
-      td.innerHTML = arr[i];
-      tr.appendChild(td);
-  }
-  tableEle.appendChild(tr);
+    
+    // テーブルの列を 追加する
+    var div = document.createElement('div');
+    div.classList.add('user');
+    div.innerHTML = arr[i][1];
+    table.appendChild(div);
+
   }
 }
 

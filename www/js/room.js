@@ -63,7 +63,7 @@ function Delete(){
   });
 }
 
-function RoomInTo(user_id,room_id,adminflg){
+async function RoomInTo(user_id,room_id,adminflg){
 
   var RoomPlayer = ncmb.DataStore("room_player");
   var roomplayer = new RoomPlayer();
@@ -74,7 +74,7 @@ function RoomInTo(user_id,room_id,adminflg){
    roomplayer.save()
   .then(function(){
     // 保存後の処理
-    alert("ルーム作成成功");
+    alert("ルーム参加成功");
     })
     .catch(function(err){
      // エラー処理
@@ -107,17 +107,17 @@ async function RoomOut(){
 
 }
 
-function RoomChange(){
+function RoomChange(pw){
 
   var Room = ncmb.DataStore("room");
 
-  var room_name = document.getElementById("room_name").value;
+  var password = pw;
   var room_id = Number(localStorage.getItem("room_id"));
 
 
   Room.equalTo("room_id",room_id).fetchAll().then(function(results){
     var object = results[0];
-    object.set("room_name",room_name);
+    object.set("password",password);
     return object.update();
     })
     .then(function(){
@@ -162,6 +162,7 @@ async function RoomSearch(){
   var Room = ncmb.DataStore("room");
   var arr = [];
   var room_name = sessionStorage.getItem("room_name");
+  var pw_flg = sessionStorage.getItem("pass");
 
   await Room.regularExpressionTo("room_name",".*"+room_name+".*").equalTo("delete_flag",2).order("room_id",true).fetchAll()
   .then(function(results){
@@ -170,7 +171,10 @@ async function RoomSearch(){
               var id = object.get("room_id");
               var name = object.get("room_name");
               var comment = object.get("comment");
-              var pw = object.get("password");
+              var pw = null;
+              if(pw_flg == 1){
+                pw = object.get("password");
+              }
               var count = object.get("play_limit");
               var arr2 = [name,comment,pw,count,id,null];
               arr.push(arr2);
@@ -214,20 +218,79 @@ async function AdminCheck(){
   await Room.equalTo("room_id",room_id).equalTo("user_id",user_id).fetchAll().then(function(results){
               var object = results[0];
               admin_flg = object.get("admin_flg");
-              
     });
   return admin_flg;
 }
 
 async function UserSearch(){
-  var Room = ncmb.DataStore("room_player");
+  var Room_player = ncmb.DataStore("room_player");
   var room_id = Number(localStorage.getItem("room_id"));
   var arr = [];
-  await Room.equalTo("room_id",room_id).fetchAll().then(function(results){
+  await Room_player.equalTo("room_id",room_id).fetchAll().then(function(results){
     for (var i = 0; i < results.length; i++) {
               var object = results[i];
-              arr.push(object.get("user_id"));
-    }});
+              var player = object.get("user_id");
+              var arr2 = [player,null];
+              arr.push(arr2);
+  }});
+  var user = ncmb.DataStore("users");
+  var user_id = [];
+  for(var i = 0; i < arr.length;i++){
+    user_id.push(arr[i][0]);
+  }
+    await user.in("user_id",user_id).fetchAll().then(function(results){
+      for(var i = 0; i < results.length; i++){
+        var object = results[i];
+        arr[i][1] = object.get("user_name");
+      }
+    });
   return arr;
+}
+
+async function EndView(){
+  var Room_player = ncmb.DataStore("room_player");
+  var room_id = Number(localStorage.getItem("room_id"));
+  var user_id = Number(localStorage.getItem("user_id"))
+  var arr = [];
+  await Room_player.equalTo("room_id",room_id).order("room_id",true).fetchAll().then(function(results){
+    for (var i = 0; i < results.length; i++) {
+              var object = results[i];
+              var player = object.get("user_id");
+              var arr2 = [player,null,null];
+              arr.push(arr2);
+  }});
+
+  var user = ncmb.DataStore("users");
+
+  var users = [];
+
+  for(var i = 0; i < arr.length;i++){
+    users.push(arr[i][0]);
+  }
+  await user.in("user_id",users).order("game_money",true).fetchAll().then(function(results){
+    for (var i = 0; i < results.length; i++) {
+              var object = results[i];
+              alert(object.get("game_money"));
+              arr[i][0] = object.get("user_id");
+              arr[i][1] = object.get("game_money");
+              arr[i][2] = object.get("game_count");
+    }});
+    return arr;
+}
+
+
+function EndResist(){
+
+  var user = ncmb.DataStore("users");
+  var user_id = Number(localStorage.getItem("user_id"));
+  var money = Number(localStorage.getItem("Money"));
+  var totalstep = Number(localStorage.getItem("totalStep"));
+
+  user.equalTo("user_id",user_id).fetch().then(function(results){
+    var object = results;
+    object.set("game_money",money);
+    object.set("game_count",totalstep);
+    return object.update();
+  });
 }
 
