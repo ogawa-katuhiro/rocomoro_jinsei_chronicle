@@ -256,7 +256,7 @@ async function EndView(){
     for (var i = 0; i < results.length; i++) {
               var object = results[i];
               var player = object.get("user_id");
-              var arr2 = [player,null,null];
+              var arr2 = [player,null,null,null];
               arr.push(arr2);
   }});
 
@@ -273,6 +273,7 @@ async function EndView(){
               arr[i][0] = object.get("user_id");
               arr[i][1] = object.get("game_money");
               arr[i][2] = object.get("game_count");
+              arr[i][3] = object.get("user_name");
     }});
     return arr;
 }
