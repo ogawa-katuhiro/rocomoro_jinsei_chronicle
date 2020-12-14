@@ -35,9 +35,12 @@
   <p>コメント</p>
   <p class="p" id="comment"></p>
   <p id="user_title">参加者一覧</p>
+  <div id="tabler">
   <div id="table">
   </div>
-  <input class="button" type="button" class="startbutton"id="admin" value="ゲーム開始">
+  </div>
+  <input class="button" type="button" class="startbutton"id="admin" onclick="EndTime()" value="ゲーム開始">
+  <input class="button" type="button" onclick="TimeCheck()" value="check">
 <script>
   async function aaaaaa(){
     var flag = await RoomOut();
@@ -71,19 +74,26 @@
 		// noneで非表示
 		admin.style.display ="none";
 	}
+
+  var tabler = document.getElementById("tabler");
   var table = document.getElementById("table");
+  table.remove();
+  var diver = document.createElement('div');
+  diver.classList.add('table');
+  tabler.appendChild(diver);
+
+
   for (var i = 0; i < arr.length; i++) {
     
     // テーブルの列を 追加する
     var div = document.createElement('div');
     div.classList.add('user');
     div.innerHTML = arr[i][1];
-    table.appendChild(div);
+    diver.appendChild(div);
 
+    }
   }
-}
-TimeCheck();
-view();
+  view();
 // setInterval(TimeCheck(), 1000);
 // setInterval(view(), 1000);
 </script>
