@@ -3,7 +3,6 @@
   <name>Minimum Template</name>
   <description/>
   <author/>
-  <content src="HTML/title.html"/>
   <access origin="*"/>
   <allow-navigation href="*"/>
   <allow-intent href="itms:*"/>
