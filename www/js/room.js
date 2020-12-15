@@ -111,6 +111,9 @@ function RoomChange(pw){
   var Room = ncmb.DataStore("room");
 
   var password = pw;
+  if(password == ""){
+    password = null;
+  }
   var room_id = Number(localStorage.getItem("room_id"));
 
 

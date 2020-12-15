@@ -12,8 +12,7 @@
 </head>
 <body>
   <input type="button" onclick="aaaaaa();" value="退室">
-  <button id="pass">メニュー</button>
-  <button onclick="history.back()">戻る</button>
+  <button id="pass">パスワード変更</button>
 <script>
 
        //ここからパスワード変更
@@ -39,8 +38,7 @@
   <div id="table">
   </div>
   </div>
-  <input class="button" type="button" class="startbutton"id="admin" onclick="EndTime()" value="ゲーム開始">
-  <input class="button" type="button" onclick="TimeCheck()" value="check">
+  <input class="button startbutton" type="button" id="admin" onclick="EndTime()" value="ゲーム開始">
 <script>
   async function aaaaaa(){
     var flag = await RoomOut();
@@ -48,7 +46,7 @@
       await Delete();
     }
     alert("退室しました");
-    location.href='testRoomCreate.html';
+    location.href='Menu.html';
   }
 
 
@@ -57,7 +55,6 @@
   
   var arr = await UserSearch();
   var flg = await AdminCheck();
-  console.log(flg);
 
 
   var room_name = localStorage.getItem("room_name");
@@ -93,9 +90,8 @@
 
     }
   }
-  view();
-// setInterval(TimeCheck(), 1000);
-// setInterval(view(), 1000);
+setInterval(TimeCheck, 1000);
+setInterval(view, 1000);
 </script>
 </body>
 </html>
