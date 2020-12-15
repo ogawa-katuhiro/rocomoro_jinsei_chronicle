@@ -323,7 +323,7 @@ function TimeCheck(){
   room.equalTo("room_id",room_id).fetch().then(function(results){
     var object = results;
     if(object.get("end_time") != null){
-      location.href="Menu.html"
+      location.href="game.html"
     }
   });
 }
