@@ -1,0 +1,125 @@
+body{
+  margin: 0;
+  display: block;
+  background-image: url("../imges/haikei.png");
+  background-size: cover;               /* 全画面 */
+  background-attachment: fixed;         /* 固定 */
+  background-position: center center;   /* 縦横中央 */
+}
+/*ヘッター部分///////////////////*/
+header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid;
+}
+header>.back-btn{
+   margin-right: auto;
+   margin-left:10px;
+   background-color: white;
+   border: solid 1.5px;
+}
+h1.title {
+  font-size: 30px;
+  color: red;
+  list-style: none;
+  margin: 0px;
+  padding-top:5px; 
+  padding-right: 15px;
+}
+/*//////////////////////////*/
+/*選択*/
+select#select{
+  margin-top:10px; 
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-size: 95%;
+}
+p{
+  font-size:20px;
+  text-justify: auto; 
+}
+
+/*ランキング*/
+a {
+  text-decoration: none;
+}
+div{
+  font-size: 25px;
+}
+div.rank{
+  margin-left: 40px;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+div.rank-list{
+  clear:both; 
+  float: left;
+  margin-left: 10px;
+  width:290px;
+  height:80px;
+  box-sizing: border-box;
+}
+div.rank1{
+  clear:both; 
+  float: left;
+  border: solid 1px;
+  border-right:none; 
+  width: 70px;
+  height:70px;
+  background-color: white;
+  text-align:center; 
+  box-sizing: border-box;
+  margin-top: 5px;
+
+}
+
+div.rank2{
+  float: left;
+  width: 220px;
+  height: 70px;
+}
+
+div.rank2-1{
+  width: 220px;
+  height: 35px;
+  border: solid 1px;
+  border-bottom: none;
+  box-sizing: border-box;
+  background-color: white;
+    margin-top: 5px;
+}
+div.rank2-2{
+  width: 220px;
+  height: 35px;
+  border: solid 1px;
+  box-sizing: border-box;
+  background-color: white;
+  
+}
+
+/*スクロール*/
+div.ranking{
+  margin-top:100px; 
+  margin-left:30px;
+  top: 0px;
+  left: 0px;
+  width: 320px;
+  height:430px;
+  border: solid 1px;
+    overflow-y: scroll;
+}
+/*デザイン*/
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 0 0 2px #777; 
+}
+::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 10px;
+  box-shadow: none;
+}

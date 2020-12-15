@@ -46,20 +46,18 @@ function Create(room_name,count,password,comment,max_id){
    
 }
 
-function Delete(){
+async function Delete(){
   var Room = ncmb.DataStore("room");
 
   var room_id = Number(localStorage.getItem("room_id"));
 
-  Room.equalTo("room_id",room_id).fetchAll().then(function(results){
-    var object = results[0];
-    alert(object.get("room_id"));
+  await Room.equalTo("room_id",room_id).fetch().then(function(results){
+    console.log("1");
+    var object = results;
+    console.log("2");
     object.set("delete_flag",1);
+    console.log("3");
     return object.update();
-  })
-  .catch(function(err){
-      // エラー処理
-      alert(err);
   });
 }
 
@@ -99,10 +97,10 @@ async function RoomOut(){
   
   })
   if(admin_flg == 1){
-      Delete();
+       await Delete();
   }
 
-  location.href='testRoomCreate].html';
+  // location.href='testRoomCreate].html';
 
 }
 
