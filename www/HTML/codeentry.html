@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <link rel="stylesheet" href="../css/takeover.css">
+    <script src="../components/loader.js"></script>
+    <script src="../js/account.js"></script>
+    <!--データ引継ぎのコード入力画面-->
+    <script>
+  
+    </script>
+    <title>データ引継ぎ</title>
+</head>
+<body>
+  <h1>データ引継ぎ</h1>
+  <div class="box">
+  <p>引き継ぎナンバーを入力するとデータを引き継いで遊べます</p>
+      <table>
+        <tr>
+          <th>引き継ぎナンバー</th>
+        </tr>
+        <tr>
+          <td><input type="text" id="code"placeholder ="引き継ぎコードを入力"></td>
+          </tr>
+      </table>
+              </div>
+      <table>
+      <div class="wrap">
+        <tr>
+          <td>
+        <button class="button"onClick="check()">引き継ぎ</button>
+        </td>
+        <tr>
+          <td>
+    <button class="button"onClick="location.href='title.html'">キャンセル</button>
+          </td>
+          </tr>
+    </div>
+</body>
+<script>
+  function check(){
+    var text = sanitaize.encode(document.getElementById("code").value);
+    if(text == null || text == ""){
+      alert("引継ぎコードを入力してください");
+      return;
+    }else{
+      takeoverEntry();
+    }
+  }
+</script>
+</html>

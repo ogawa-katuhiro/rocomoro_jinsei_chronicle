@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <link rel="stylesheet" href="../css/takeover.css">
+    <script src="../components/loader.js"></script>
+    <script src="../js/account.js"></script>
+    <script>
+
+      //ボタンを押下した時の処理
+     function btnResistClick(){
+
+       //ローカルストレージに値をセットする処理
+        var text = sanitaize.encode(document.getElementById("inputName").value);
+
+        sessionStorage.setItem('data1', text);
+        
+        document.getElementById("inputName").value = "";
+    }
+    </script>
+
+<!--アカウント登録の画面-->
+<title>登録画面</title>
+</head>
+<body>
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">新規アカウント登録画面</h1>
+  </div>
+  <div class="box">
+  <table>
+    <tr>
+      <th>ユーザー名</th>
+    </tr>
+    <tr>
+        <td>
+          <!--ユーザーの名前を入力するテキストボックス-->
+          <div class="inputWithIcon inputIconBg">
+          <input type="text" id="inputName" placeholder="user name" required>
+           <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+        </div>
+        </td>
+    </tr>    
+    </table>
+    </div>
+
+    <!--テキストボックスに入れた値を持って確認画面へ遷移するボタン-->
+    <div class="wrap">
+    <button onClick="btnResistClick(); location.href='accountconfirm.html'"class="button" >登録</button>
+    <button onClick="location.href='title.html'"class="button">戻る</button>
+  </div>
+</body>
+</html>

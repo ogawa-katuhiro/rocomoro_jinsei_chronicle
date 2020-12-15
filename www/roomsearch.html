@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="css/takeover.css">
+    <script src="components/loader.js"></script>
+    <script src="js/room.js"></script>
+    
+</head>
+<body>
+  <input type="text" id="room_name">
+  <select id="pass">
+        <option value="1">すべて</option>
+        <option value="2">なし</option>
+      </select>
+   <button class="button" id="roomSerch"onClick="btnRoomSearch()" >ルーム検索</button>
+    <button onClick="history.back()">戻る</button>
+
+    <script>
+          //ボタンを押下した時の処理
+     function btnRoomSearch(){
+
+       //ローカルストレージに値をセットする処理
+        sessionStorage.setItem('room_name', document.getElementById("room_name").value);
+        sessionStorage.setItem('pass', document.getElementById("pass").value);
+
+        location.href='roomlist.html'
+    }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="components/loader.js"></script>
+    <script src="js/room.js"></script>
+</head>
+<body>
+  <input type="button" onclick="aaaaaa();" value="退室">
+  <button id="pass">メニュー</button>
+  <button onclick="history.back()">戻る</button>
+<script>
+
+       //ここからパスワード変更
+    const btn = document.getElementById('pass');
+  
+    btn.addEventListener('click', function() {
+  
+    var text = prompt('パスワード入力');
+
+    if(text != null){
+
+      RoomChange(text);
+    }
+  
+  });
+</script>
+  <p>ルーム名</p>
+  <p class="p" id="room_name"></p>
+  <p>コメント</p>
+  <p class="p" id="comment"></p>
+  <p class="user_title" id="user_title">参加者一覧</p>
+  <div id="table">
+  </div>
+  <input type="button" class="startbutton"id="admin" onclick="EndTime()" value="ゲーム開始">
+<script>
+  async function aaaaaa(){
+    var flag = await RoomOut();
+    if(flag == 1){
+      await Delete();
+    }
+    alert("退室しました");
+    location.href='testRoomCreate.html';
+  }
+
+
+  async function view(){
+  var arr = await UserSearch();
+  var flg = await AdminCheck();
+
+
+  var room_name = localStorage.getItem("room_name");
+  var comment = localStorage.getItem("comment");
+  
+
+  document.getElementById("room_name").innerHTML = room_name;
+  document.getElementById("comment").innerHTML = comment;
+
+  var text = "";
+  if(flg === 1){
+		// blockで表示
+		admin.style.display ="block";
+	}else{
+		// noneで非表示
+		admin.style.display ="none";
+	}
+  var table = document.getElementById("table");
+  for (var i = 0; i < arr.length; i++) {
+    
+    // テーブルの列を 追加する
+    var div = document.createElement('div');
+    div.classList.add('user');
+    div.innerHTML = arr[i][1];
+    table.appendChild(div);
+
+  }
+}
+async function startfnc(){
+ var time = 
+}
+
+setInterval(startfnc(), 1000);
+setInterval(view(), 1000);
+</script>
+</body>
+</html>
