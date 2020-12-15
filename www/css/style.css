@@ -74,3 +74,6 @@ div.user{
   color: blue;
   text-decoration: underline;
 }
+input.startbutton{
+  margin: auto;
+}

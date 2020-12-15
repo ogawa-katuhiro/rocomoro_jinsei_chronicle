@@ -12,8 +12,7 @@
 </head>
 <body>
   <input type="button" onclick="aaaaaa();" value="退室">
-  <button id="pass">メニュー</button>
-  <button onclick="history.back()">戻る</button>
+  <button id="pass">パスワード変更</button>
 <script>
 
        //ここからパスワード変更
@@ -35,9 +34,11 @@
   <p>コメント</p>
   <p class="p" id="comment"></p>
   <p id="user_title">参加者一覧</p>
+  <div id="tabler">
   <div id="table">
   </div>
-  <input class="button" type="button" class="startbutton"id="admin" value="ゲーム開始">
+  </div>
+  <input class="button startbutton" type="button" id="admin" onclick="EndTime()" value="ゲーム開始">
 <script>
   async function aaaaaa(){
     var flag = await RoomOut();
@@ -45,7 +46,7 @@
       await Delete();
     }
     alert("退室しました");
-    location.href='testRoomCreate.html';
+    location.href='Menu.html';
   }
 
 
@@ -54,7 +55,6 @@
   
   var arr = await UserSearch();
   var flg = await AdminCheck();
-  console.log(flg);
 
 
   var room_name = localStorage.getItem("room_name");
@@ -71,21 +71,27 @@
 		// noneで非表示
 		admin.style.display ="none";
 	}
+
+  var tabler = document.getElementById("tabler");
   var table = document.getElementById("table");
+  table.remove();
+  var diver = document.createElement('div');
+  diver.classList.add('table');
+  tabler.appendChild(diver);
+
+
   for (var i = 0; i < arr.length; i++) {
     
     // テーブルの列を 追加する
     var div = document.createElement('div');
     div.classList.add('user');
     div.innerHTML = arr[i][1];
-    table.appendChild(div);
+    diver.appendChild(div);
 
+    }
   }
-}
-TimeCheck();
-view();
-// setInterval(TimeCheck(), 1000);
-// setInterval(view(), 1000);
+setInterval(TimeCheck, 1000);
+setInterval(view, 1000);
 </script>
 </body>
 </html>

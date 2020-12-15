@@ -111,6 +111,9 @@ function RoomChange(pw){
   var Room = ncmb.DataStore("room");
 
   var password = pw;
+  if(password == ""){
+    password = null;
+  }
   var room_id = Number(localStorage.getItem("room_id"));
 
 
@@ -304,11 +307,11 @@ function EndTime(){
   var room = ncmb.DataStore("room");
   var room_id = Number(localStorage.getItem("room_id"));
   var now = new Date();
-  var end = date.setHours(date.getHours() + 3);
+  var end = now.setHours(now.getHours() + 3);
 
   room.equalTo("room_id",room_id).fetch().then(function(results){
     var object = results;
-    object.set("end_time",now);
+    object.set("end_time",end);
     return object.update();
   });
 

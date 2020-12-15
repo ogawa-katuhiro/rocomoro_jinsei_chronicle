@@ -31,7 +31,7 @@
       <div class="wrap">
         <tr>
           <td>
-        <button class="button"onClick="takeoverEntry()">引き継ぎ</button>
+        <button class="button"onClick="check()">引き継ぎ</button>
         </td>
         <tr>
           <td>
@@ -40,4 +40,15 @@
           </tr>
     </div>
 </body>
+<script>
+  function check(){
+    var text = sanitaize.encode(document.getElementById("code").value);
+    if(text == null || text == ""){
+      alert("引継ぎコードを入力してください");
+      return;
+    }else{
+      takeoverEntry();
+    }
+  }
+</script>
 </html>
