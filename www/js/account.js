@@ -19,6 +19,7 @@ function resist(max_id){
   users.set("user_id",user_id);
   users.set("all_money",0);
   users.set("count",0);
+  users.set("delete_flg",1);
   users.set("game_money",0);
   users.set("game_count",0);
   users.set("mobile",mobile);
@@ -33,36 +34,43 @@ function resist(max_id){
         // エラー処理
     });
 }
-function change(){
+function change(text){
 
   var Datastore = ncmb.DataStore("users");
-  Datastore.equalTo("user_id",2).fetchAll().then(function(results){
-             results[0].set("user_name",sessionStorage.getItem("change_name"));
-             return results[0].update();
+
+  var user_id = Number(localStorage.getItem('user_id'));
+
+  Datastore.equalTo("user_id",user_id).fetch().then(function(results){
+             results.set("user_name",text);
+             return results.update();
           })
-    .then(function(gameScore){
+    .then(function(){
     // 保存後の処理
     alert("変更成功");
+    location.href="Menu.html";
     })
     .catch(function(err){
         // エラー処理
-        alert("変更失敗");
+     alert("変更失敗");
     });
 }
 
 function userDelete(){
   var Datastore = ncmb.DataStore("users");
-  var datastore = Datastore.equalTo("user_id",1)
-           .fetchAll()
-           .then(function(datastore){
-             datastore.set("user_name",document.getElementById(user_name).value);
+  var user_id = Number(localStorage.getItem('user_id'));
+  Datastore.equalTo("user_id",user_id).fetch().then(function(datastore){
+
+             datastore.set("delete_flg",2);
              return datastore.update();
           })
-    .then(function(gameScore){
+    .then(function(){
     // 保存後の処理
+    alert("削除成功");
+    location.href="title.html";
     })
     .catch(function(err){
         // エラー処理
+        alert("削除失敗");
     });
 }
 function MaxId(){
@@ -136,7 +144,7 @@ function login(){
   
   var mobile = localStorage.getItem('mobile');
 
-  Users.equalTo("mobile",mobile).fetchAll().then(function(results){
+  Users.equalTo("mobile",mobile).equalTo("delete_flg",1).fetchAll().then(function(results){
     var object = results[0];
     if(object != null){
       var user_id = object.get("user_id");
