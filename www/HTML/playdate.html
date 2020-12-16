@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="../components/loader.css">
+    <link rel="stylesheet" href="../css/takeover.css">
+    <script src="../components/loader.js"></script>
+    <script src="../js/account.js"></script>
+</head>
+<body>
+   <p id="user_name"></p>
+   <p>総金額</p>
+   <p id="all_money"></p>
+   <p>最高金額</p>
+   <p id="max_money"></p>
+   <p>最低金額</p>
+   <p id="min_money"></p>
+   <p>総歩数</p>
+   <p id="count"></p>
+
+   <input type="button" class="button" onclick="history.back()" value="戻る">
+</body>
+<script>
+  async function view(){
+    var arr = await playdate();
+
+    var user_name = document.getElementById('user_name');
+    user_name.innerHTML = arr[0];
+    var all_money = document.getElementById('all_money');
+    all_money.innerHTML = arr[1];
+    var max_money = document.getElementById('max_money');
+    max_money.innerHTML = arr[2];
+    var min_money = document.getElementById('min_money');
+    min_money.innerHTML = arr[3];
+    var count = document.getElementById('count');
+    count.innerHTML = arr[4];
+  }
+
+  view();
+</script>
+</html>

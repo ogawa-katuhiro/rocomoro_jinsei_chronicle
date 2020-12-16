@@ -149,6 +149,23 @@ function login(){
     }});
 }
 
+async function playdate(){
+  var Users = ncmb.DataStore("users");
+  
+  var user_id = Number(localStorage.getItem('user_id'));
+  var arr = [];
+
+  await Users.equalTo("user_id",user_id).fetch().then(function(results){
+    var object = results;
+    arr.push(object.get("user_name"));
+    arr.push(object.get("max_money"));
+    arr.push(object.get("min_money"));
+    arr.push(object.get("all_money"));
+    arr.push(object.get("count"));
+  });
+  return arr;
+}
+
 sanitaize = {
   encode : function (str) {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');

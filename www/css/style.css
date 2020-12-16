@@ -77,3 +77,18 @@ div.user{
 input.startbutton{
   margin: auto;
 }
+.startbutton{
+  display :none;
+  width: 300px;
+}
+.pass{
+  display :none;
+  margin-left: 250px;
+}
+.taisitu{
+  float: left;
+  margin-bottom: 20px;
+}
+.room_name{
+  margin-right: 57px;
+}

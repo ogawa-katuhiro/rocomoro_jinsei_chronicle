@@ -22,8 +22,7 @@
       <input type="text" id="comment"placeholder="コメント">
     </div>
     <input type="button" class="button" id="inputRoom"onClick="Createfnc()"value="ルーム作成">
-     <input type="button" class="button" id="inputRoom"onClick="btnRoomCreate()"value="ルーム">
-    <button onClick="history.back()">戻る</button>
+    <button class="button"onClick="history.back()">戻る</button>
   </div>
   <script>
         //ボタンを押下した時の処理
@@ -46,6 +45,7 @@
         }
 
         var max_id = await RoomMaxId();
+        
 
         await Create(room_name,count,password,comment,max_id);
 

@@ -11,8 +11,8 @@
     <script src="../js/room.js"></script>
 </head>
 <body>
-  <input type="button" onclick="aaaaaa();" value="退室">
-  <button id="pass">パスワード変更</button>
+  <button class="taisitu"onclick="aaaaaa();">退室</button>
+  <button id="pass"class="pass">パスワード変更</button>
 <script>
 
        //ここからパスワード変更
@@ -29,7 +29,7 @@
   
   });
 </script>
-  <p>ルーム名</p>
+  <p class="room_name">ルーム名</p>
   <p class="p" id="room_name"></p>
   <p>コメント</p>
   <p class="p" id="comment"></p>
@@ -67,9 +67,11 @@
   if(flg === 1){
 		// blockで表示
 		admin.style.display ="block";
+    pass.style.display ="block";
 	}else{
 		// noneで非表示
 		admin.style.display ="none";
+    pass.style.display ="none";
 	}
 
   var tabler = document.getElementById("tabler");

@@ -53,13 +53,12 @@ function Delete(){
 
   Room.equalTo("room_id",room_id).fetchAll().then(function(results){
     var object = results[0];
-    alert(object.get("room_id"));
     object.set("delete_flag",1);
     return object.update();
   })
   .catch(function(err){
       // エラー処理
-      alert(err);
+      console.log("削除失敗");
   });
 }
 
