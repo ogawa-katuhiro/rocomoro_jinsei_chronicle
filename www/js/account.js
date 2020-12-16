@@ -52,16 +52,17 @@ function change(text){
     });
 }
 
-function userDelete(){
+async function userDelete(){
   var Datastore = ncmb.DataStore("users");
-  var user_id = localStorage.getItem("user_id");
-  var datastore = Datastore.equalTo("user_id",user_id).fetch().then(function(datastore){
-             datastore.set("user_name",);
+  var user_id = Number(localStorage.getItem("user_id"));
+  await Datastore.equalTo("user_id",user_id).fetch().then(function(datastore){
+             datastore.set("delete_flag",2);
              return datastore.update();
           })
     .then(function(){
     // 保存後の処理
     alert("削除成功");
+    location.href="title.html";
     })
     .catch(function(err){
         // エラー処理
