@@ -306,11 +306,13 @@ function EndTime(){
   var room = ncmb.DataStore("room");
   var room_id = Number(localStorage.getItem("room_id"));
   var now = new Date();
-  now.setHours(now.getHours() + 3);
+  //now.setHours(now.getHours() + 3);
+  //now.setMinutes(now.getMinutes() + 5);
+  now.setSeconds(now.getSeconds() + 10);
 
   room.equalTo("room_id",room_id).fetch().then(function(results){
     var object = results;
-    object.set("end_time",now);
+    object.set("end_time", now.toString());
     return object.update();
   });
 
