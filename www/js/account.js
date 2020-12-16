@@ -140,7 +140,6 @@ function login(){
     var object = results[0];
     if(object != null){
       var user_id = object.get("user_id");
-      console.log(user_id);
       localStorage.setItem('user_id',user_id);
       alert("ログイン成功");
       location.href="Menu.html";
