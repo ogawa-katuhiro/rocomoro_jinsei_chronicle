@@ -1,6 +1,6 @@
 // ニフクラのキー
-var apikey = "110f4b0a4ba42133b396ac314d08389504c5fcf859ec6ec75f182a519a9d0d65";
-var clientkey = "c356164f83c02738a44109930a31f571fb10a4458bd2b62942abafc8837de9fa";
+var apikey = "3175ddc3c2fa11d0f748f336750ae51023d4a1a1ea1f09d77d3910cbd768d03b";
+var clientkey = "50a1429776c8c386c04301ff11b50b555ca71fe1970db72f4e01f1f7257bc9d5";
 // SDK initialization.
 var ncmb = new NCMB(apikey, clientkey);
 
@@ -746,7 +746,7 @@ backgroundMap.collisionData = [
 
     //ゲーム終了するボタンにタッチイベントを設定する
     endButton.addEventListener(Event.TOUCH_START, function(e) {
-      location.href = 'start.html';
+      location.href = 'Menu.html';
     });
     
 

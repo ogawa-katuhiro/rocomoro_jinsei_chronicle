@@ -307,11 +307,11 @@ function EndTime(){
   var room = ncmb.DataStore("room");
   var room_id = Number(localStorage.getItem("room_id"));
   var now = new Date();
-  var end = now.setHours(now.getHours() + 3);
+  now.setHours(now.getHours() + 3);
 
   room.equalTo("room_id",room_id).fetch().then(function(results){
     var object = results;
-    object.set("end_time",end);
+    object.set("end_time",now);
     return object.update();
   });
 
@@ -325,7 +325,7 @@ function TimeCheck(){
   room.equalTo("room_id",room_id).fetch().then(function(results){
     var object = results;
     if(object.get("end_time") != null){
-      location.href="Menu.html"
+      location.href="../game.html";
     }
   });
 }
