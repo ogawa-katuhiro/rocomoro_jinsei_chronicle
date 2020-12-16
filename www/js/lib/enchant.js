@@ -3382,15 +3382,14 @@ enchant.Map = enchant.Class.create(enchant.Entity, {
         }
         var width = this._image.width;
         var height = this._image.height;
-        console.log(width+ 'と' +height);
+
         var tileWidth = this._tileWidth || width;
         var tileHeight = this._tileHeight || height;
-        console.log(tileWidth + 'と' + tileHeight);
+        
         x = x / tileWidth | 0;
         y = y / tileHeight | 0;
         //		return this._data[y][x];
         var data = this._data[0];
-        console.log('checkTile' + x + ',' + y);
         return data[y][x];
     },
     /**

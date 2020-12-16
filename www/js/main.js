@@ -1,6 +1,6 @@
 // ニフクラのキー
-var apikey = "110f4b0a4ba42133b396ac314d08389504c5fcf859ec6ec75f182a519a9d0d65";
-var clientkey = "c356164f83c02738a44109930a31f571fb10a4458bd2b62942abafc8837de9fa";
+var apikey = "3175ddc3c2fa11d0f748f336750ae51023d4a1a1ea1f09d77d3910cbd768d03b";
+var clientkey = "50a1429776c8c386c04301ff11b50b555ca71fe1970db72f4e01f1f7257bc9d5";
 // SDK initialization.
 var ncmb = new NCMB(apikey, clientkey);
 
@@ -54,6 +54,8 @@ window.onload = function() {
     var RouletteValue = 0; 
     var RouletteV;
     var CurrentTile = 0;
+    getEndTime();
+
 
     game.onload = function() {     // ゲームの準備が整ったらメインの処理を実行します
         /**
@@ -69,7 +71,8 @@ window.onload = function() {
             scene.backgroundColor = '#ffffff';      // シーンの背景色を設定
             StartBtn.addEventListener(Event.TOUCH_START, function(e) { // シーンにタッチイベントを設定
                 //現在表示しているシーンをゲームシーンに置き換えます
-                getEndTime();
+                var sound = game.assets['./Sound/Decision.mp3'].clone();
+                sound.play();
                 game.replaceScene(createGameScene());
             });
 
@@ -121,37 +124,38 @@ window.onload = function() {
               FavorabilityR1 = localStorage.getItem('FR1');
             });
 
-            // 制限時間の表示
-
-        //現在時刻を取得
-        var now = new Date();
-        //終了時刻を取得
-        var end = new Date(localStorage.getItem('endTime'));
-        //残り時間計算
-        var diff = now.getTime() - end.getTime();
-        var timeLimit = Math.floor(Math.abs(diff) / (60 * 1000));
+        
+        
+        // 制限時間の表示
 
         var timeUI = new MutableText(10,10);
-        timeUI.time = timeLimit;
-        timeUI.text = 'TIME:' + timeUI.time + 'min';
         scene.addChild(timeUI);
 
         // 制限時間が減るようにしよう
         var flag = false;
         timeUI.addEventListener('enterframe',async function(){
-          now = new Date();
-          diff = now.getTime() - end.getTime();
-          timeLimit = Math.abs(diff) / (60 * 1000);
-          var viewTime = timeLimit.toFixed(1);
-          timeUI.time = Math.floor(timeLimit) + 1;
-          timeUI.text = 'TIME:' + timeUI.time + 'min';
-             if(viewTime == 0){
+          //現在時刻を取得
+          var now = new Date();
+          //終了時刻を取得
+          var end = new Date(localStorage.getItem('endTime'));
+          diff = end.getTime() - now.getTime();
+          //HH部分取得
+          var diffHour = diff / (1000 * 60 * 60);
+          //MM部分取得
+          var diffMinute = (diffHour - Math.floor(diffHour)) * 60;
+          //SS部分取得
+          var diffSecond = (diffMinute - Math.floor(diffMinute)) * 60;
+
+          timeUI.time = ('00' + Math.floor(diffHour)).slice(-2) + ':' + ('00' + Math.floor(diffMinute)).slice(-2) + ':' + ('00' + Math.round(diffSecond)).slice(-2);
+          timeUI.text = 'TIME:' + timeUI.time;
+             if(diff <= 0){
                var myMoney = Number(localStorage.getItem('Money'));
                var totalStep = Number(localStorage.getItem('totalStep'));
                if(!flag){
                  flag = true;
                  setScore(myMoney, totalStep);
                  var arr = await EndView();
+                 console.log(arr);
                }
                game.popScene();					//mainSceneシーンを外す
                game.pushScene(endScene);
@@ -952,7 +956,7 @@ backgroundMap.collisionData = [
 
           return scene;
         };
-///////////////////////追加したコード
+
         var createLoveEventScene = function() {
           var sound = game.assets['./Sound/Decision.mp3'].clone();
           sound.play();
@@ -1160,10 +1164,8 @@ backgroundMap.collisionData = [
 
         //ルーレットを回し、値を取得する関数
         function RouletteC() {
-        var Atai = 5;
+        var Atai = Math.floor(Math.random() * 6) + 1;
         swal('ルーレットを回して' + Atai + 'が出た！');
-        //alert('ルーレットを回して' + Atai + 'が出た！');
-        //var Atai = Math.floor(Math.random() * 6) + 1;
         return Atai;
         };
 
@@ -1244,11 +1246,9 @@ backgroundMap.collisionData = [
             var object = results;
 
             var endTime = object.get("end_time");
+
             localStorage.setItem('endTime', endTime);
           })
-          //var endTime = new Date();                                
-          //endTime.setMinutes(endTime.getMinutes() + 5)
-          //localStorage.setItem('endTime', endTime);
          }
 
          //プレイヤーのスコアをニフクラに保存
@@ -1258,7 +1258,7 @@ backgroundMap.collisionData = [
           var maxMoney;
           var minMoney;
           var userValue;
-          var userId = 12345678;
+          var userId = Number(localStorage.getItem("user_id"));
           var UserScore = ncmb.DataStore("users");
           var userScore = new UserScore();
 
@@ -1266,7 +1266,7 @@ backgroundMap.collisionData = [
          .fetch()
          .then(function(results){
             console.log("Successfully retrieved " + results.length + " scores.");
-            var object = results;
+            var object = results; 
 
             userValue = [object.get("all_money"), object.get("max_money")
             , object.get("min_money"), object.get("count")];
@@ -1296,9 +1296,9 @@ backgroundMap.collisionData = [
         async function EndView(){
           var Room_player = ncmb.DataStore("room_player");
           var room_id = Number(localStorage.getItem("room_id"));
-          //var room_id = 1;
+          console.log(room_id);
           var user_id = Number(localStorage.getItem("user_id"));
-          //var user_id = 12345678;
+          console.log(user_id);
           var arr = [];
           await Room_player.equalTo("room_id",room_id)
           .order("room_id",true)
@@ -1331,14 +1331,33 @@ backgroundMap.collisionData = [
               arr[i][3] = object.get("user_name");
             }
           });
+          console.log(arr);
           return arr;
         }
 
         //ゲーム中のスコアをニフクラに保存
-        var EndResist = function(){
+        // var EndResist = function(){
+        //   console.log('動いてる');
+        //   var user = ncmb.DataStore("users");
+        //   var user_id = Number(localStorage.getItem("user_id"));
+        //   var money = Number(localStorage.getItem("Money"));
+        //   var totalstep = Number(localStorage.getItem("totalStep"));
+
+        //   user.equalTo("user_id",user_id)
+        //   .fetch()
+        //   .then(function(results){
+        //     var object = results;
+        //     object.set("game_money",money);
+        //     object.set("game_count",totalstep);
+        //     return object.update();
+        //   });
+        // }
+        // setInterval(EndResist, 60000);
+
+        setInterval((function EndResist() {
+          // ここに処理を記述
           var user = ncmb.DataStore("users");
-          //var user_id = Number(localStorage.getItem("user_id"));
-          var user_id = 12345678;
+          var user_id = Number(localStorage.getItem("user_id"));
           var money = Number(localStorage.getItem("Money"));
           var totalstep = Number(localStorage.getItem("totalStep"));
 
@@ -1350,8 +1369,7 @@ backgroundMap.collisionData = [
             object.set("game_count",totalstep);
             return object.update();
           });
-        }
-        setInterval(EndResist, 60000);
+        }()), 60000);
 
         //イベントをニフクラから取ってくる
         function eventGet(eType, id){
