@@ -750,7 +750,7 @@ backgroundMap.collisionData = [
 
     //ゲーム終了するボタンにタッチイベントを設定する
     endButton.addEventListener(Event.TOUCH_START, function(e) {
-      location.href = 'Menu.html';
+      location.href = 'HTML/Menu.html';
     });
     
 

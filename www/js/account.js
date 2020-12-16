@@ -22,6 +22,7 @@ function resist(max_id){
   users.set("game_money",0);
   users.set("game_count",0);
   users.set("mobile",mobile);
+  users.set("delete_flag",1);
   users.set("max_money",0);
   users.set("min_money",null);
   users.save()
@@ -140,10 +141,11 @@ function login(){
   
   var mobile = localStorage.getItem('mobile');
 
-  Users.equalTo("mobile",mobile).fetchAll().then(function(results){
+  Users.equalTo("mobile",mobile).equalTo("delete_flag",1).fetchAll().then(function(results){
     var object = results[0];
     if(object != null){
       var user_id = object.get("user_id");
+      console.log(user_id);
       localStorage.setItem('user_id',user_id);
       alert("ログイン成功");
       location.href="Menu.html";
