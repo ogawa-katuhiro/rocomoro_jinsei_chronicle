@@ -273,10 +273,10 @@ async function EndView(){
   var room_id = Number(localStorage.getItem("room_id"));
   var user_id = Number(localStorage.getItem("user_id"))
   var arr = [
-    [null,null,null,null]
-    [null,null,null,null]
-    [null,null,null,null]
-    [null,null,null,null]
+    ["","なし","なし","なし"]
+    ["","なし","なし","なし"]
+    ["","なし","なし","なし"]
+    ["","なし","なし","なし"]
     ];
   await Room_player.equalTo("room_id",room_id).order("room_id",true).fetchAll().then(function(results){
     for (var i = 0; i < results.length; i++) {
