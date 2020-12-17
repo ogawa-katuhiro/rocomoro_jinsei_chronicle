@@ -41,7 +41,6 @@ view();
 <div class="rank" id="rank">
   <div class="rank1" id="rank1"></div>
   <div class="rank2">
-    <a href="PlayerDate.html">
       <div class="rank2-1" id="rank1-1"></div>
     </a>
       <div class="rank2-2" id="rank1-2"></div>
@@ -88,14 +87,12 @@ view();
    var link = document.createElement('a');
    var elem2_2 = document.createElement('div');
    elem2_1.id = 'rank2-1';//名前
-   link.innerHTML = all_status[i]
-   link.href = "PlayerDate.html?user_id="+ all_status[i+2];
+   elem2_1.innerHTML = all_status[i]
    elem2_1.classList.add("rank2-1");
    elem2_2.id = 'rank2-2';//値
    elem2_2.innerHTML = all_status[i+1]
    elem2_2.classList.add("rank2-2");
    var rank3 = document.getElementById('rank3');
-   elem2_1.appendChild(link);
    rank3.appendChild(elem2_1);
    rank3.appendChild(elem2_2);
 
